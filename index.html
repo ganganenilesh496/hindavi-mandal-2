@@ -1,53 +1,2447 @@
+
 <!DOCTYPE html>
-<html lang="mr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="mr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>हिंदवी मंडळ पावती बुक 2026</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+
 <style>
-*{box-sizing:border-box;font-family:Arial,"Noto Sans Devanagari",sans-serif}body{margin:0;background:#eef1f5;color:#222}.header{background:linear-gradient(135deg,#6f0d12,#9b151b,#6f0d12);color:#fff;padding:16px 12px;text-align:center;border-bottom:4px solid #d4a43c}.header h1{font-size:clamp(20px,5vw,34px);margin:0}.header p{margin:7px 0 0}.container{max-width:1200px;margin:auto;padding:14px}.card,.preview-wrap{background:#fff;border-radius:16px;padding:18px;box-shadow:0 4px 18px rgba(0,0,0,.1);margin-bottom:14px}.hidden{display:none!important}.nav{display:flex;gap:9px;overflow:auto;padding:10px 0}.nav button{white-space:nowrap;min-width:145px;flex:1}button{border:0;border-radius:10px;padding:14px;background:#8d1117;color:#fff;font-size:16px;font-weight:700;cursor:pointer;margin:4px 0}button:active{transform:scale(.98)}.blue{background:#1768ad}.green{background:#147a42}.purple{background:#5b3192}.orange{background:#df7a16}.dark{background:#343a40}.whatsapp{background:#159447}.cancel{background:#bf2424}input,select,textarea{width:100%;padding:13px;margin:7px 0 14px;border:1px solid #cbd1d8;border-radius:10px;font-size:16px}textarea{min-height:72px}label{font-weight:700;display:block}.message{text-align:center;font-weight:bold;padding:8px}.error{color:#c62828}.success{color:#147a42}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0}.stat{background:#fff;border-radius:15px;text-align:center;padding:18px 8px;box-shadow:0 3px 12px rgba(0,0,0,.09)}.stat strong{display:block;color:#8d1117;font-size:24px;margin:7px 0}.layout{display:grid;grid-template-columns:340px 1fr;gap:14px}.receipt{background:#fffdf8;border:4px double #8d1117;padding:14px;color:#251b14;position:relative}.r-head{display:grid;grid-template-columns:92px 1fr 92px;align-items:center;gap:10px;text-align:center;border-bottom:2px solid #c79628;padding-bottom:10px}.logo{height:84px;width:84px;border-radius:12px;background:#7b1116;color:#ffd76c;display:flex;align-items:center;justify-content:center;font-size:40px;border:2px solid #d3a73a}.r-title{font-size:clamp(19px,3vw,30px);font-weight:900;color:#7b1116}.r-sub{font-size:16px;font-weight:700;margin-top:5px}.r-place{font-size:13px;margin-top:4px}.r-no-row{display:flex;justify-content:space-between;gap:10px;align-items:center;margin:14px 0}.badge{border:1px solid #8d1117;border-radius:10px;padding:8px 12px;font-weight:700;text-align:center;min-width:115px}.receipt-main-title{text-align:center;background:#8d1117;color:#fff;font-size:28px;font-weight:900;border:3px solid #d4a43c;border-radius:25px;padding:7px;max-width:260px}.r-table{width:100%;border-collapse:collapse}.r-table td{border:1px solid #c7a768;padding:10px;font-size:16px}.r-table td:first-child{width:32%;font-weight:700;background:#fff8e9}.thanks{background:#8d1117;color:#fff;text-align:center;font-weight:800;padding:10px;border-radius:7px;margin:14px 0 10px}.r-foot{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:end}.treasurer{text-align:right}.sign-line{border-top:1px solid #222;margin-top:25px;padding-top:4px}.preview-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.wide{grid-column:1/-1}.item{padding:12px;border:1px solid #ddd;border-radius:10px;margin:8px 0;background:#fafafa}.role{background:#eee;padding:7px 12px;border-radius:20px;font-weight:bold}.section-title{color:#7b1116}.small{font-size:13px;color:#666}@media(max-width:850px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.r-head{grid-template-columns:62px 1fr 62px}.logo{width:58px;height:58px;font-size:28px}.r-title{font-size:18px}}@media(max-width:420px){.r-table td{padding:7px;font-size:14px}.r-table td:first-child{width:40%}}
-</style></head><body>
-<div class="header"><h1>🪔 हिंदवी कला व क्रीडा सांस्कृतिक मंडळ 🪔</h1><p>भवानी चौक, संगमनेर • पोलीस स्टेशन जवळ</p><p><b>मंडळ पावती बुक 2026</b></p></div>
 
-<div id="loginPage" class="container"><div class="card" style="max-width:500px;margin:25px auto"><h2 class="section-title">🔐 Admin / Worker Login</h2><input type="email" id="email" placeholder="Email टाका"><input type="password" id="password" placeholder="Password टाका"><button id="loginBtn">🔐 Login</button><div id="loginMessage" class="message"></div></div></div>
+*{
+  box-sizing:border-box;
+  font-family:Arial,"Noto Sans Devanagari",sans-serif;
+}
 
-<div id="dashboardPage" class="container hidden"><div class="card"><h2>👋 स्वागत आहे</h2><p>Email: <b id="userEmail"></b></p><p>Role: <span id="userRole" class="role"></span></p></div><div class="stats"><div class="stat">💰<strong id="totalIncome">₹0</strong>एकूण जमा</div><div class="stat">💸<strong id="totalExpense">₹0</strong>एकूण खर्च</div><div class="stat">💵<strong id="balance">₹0</strong>शिल्लक</div><div class="stat">🧾<strong id="receiptCount">0</strong>एकूण पावत्या</div><div class="stat">👥<strong id="memberCount">0</strong>वर्गणीदार</div><div class="stat">⚠️<strong id="cancelCount">0</strong>Cancel पावत्या</div></div><div class="nav"><button id="receiptBtn">🧾 नवीन पावती</button><button id="searchReceiptBtn" class="blue">🔍 पावती शोधा</button><button id="memberBtn">👥 वर्गणीदार</button><button id="expenseBtn" class="orange">💸 खर्च नोंद</button><button id="reportBtn" class="purple">📊 रिपोर्ट</button><button id="cancelReceiptBtn" class="cancel">❌ पावती रद्द</button><button id="settingsBtn" class="dark">⚙️ Settings</button><button id="logoutBtn" class="dark">🚪 Logout</button></div></div>
+body{
+  margin:0;
+  background:#f3f4f6;
+  color:#222;
+}
 
-<div id="receiptPage" class="container hidden"><div class="layout"><div class="card"><h2 class="section-title">🧾 नवीन पावती</h2><div class="badge">पावती क्रमांक:<br><span id="receiptNumber">1</span></div>
-<label>👤 वर्गणीदाराचे पूर्ण नाव</label><input id="memberName" placeholder="नाव टाका"><label>📱 मोबाईल नंबर</label><input id="mobile" maxlength="10" placeholder="10 अंकी मोबाईल नंबर"><label>🏠 पत्ता / गाव</label><textarea id="address"></textarea><label>💰 रक्कम ₹</label><input id="amount" type="number"><label>💳 Payment Mode</label><select id="paymentMode"><option value="">Payment Mode निवडा</option><option>Cash</option><option>UPI</option><option>Online</option></select><label>🔢 UPI / Transaction ID</label><input id="transactionId"><label>🧾 पावती प्रकार</label><select id="receiptType"><option>वर्गणी</option><option>देणगी</option><option>विशेष वर्गणी</option><option>इतर</option></select><label>📅 दिनांक</label><input id="receiptDate" type="date"><label>📝 टीप</label><textarea id="note"></textarea><button id="saveReceiptBtn" class="green">💾 पावती Save करा</button><button id="downloadBtn" class="blue">⬇️ पावती फोटो Download करा</button><button id="sharePhotoBtn" class="purple">📤 फोटो Share करा</button><button id="whatsappBtn" class="whatsapp">📱 WhatsApp वर पाठवा</button><button id="backReceiptBtn" class="dark">⬅️ Dashboard</button><div id="receiptMessage" class="message"></div></div>
+.hidden{
+  display:none!important;
+}
 
-<div class="preview-wrap"><h2 style="text-align:center;margin-top:0">पावतीचा प्रिंट / फोटो प्रिव्ह्यू</h2><div id="receiptPreview" class="receipt"><div class="r-head"><div class="logo">🪔</div><div><div class="r-title">हिंदवी कला व क्रीडा सांस्कृतिक मंडळ</div><div class="r-sub">मंडळ पावती बुक 2026</div><div class="r-place">भवानी चौक, संगमनेर • पोलीस स्टेशन जवळ</div></div><div class="logo">🔥</div></div><div class="r-no-row"><div class="badge">पावती क्रमांक<br><span id="pNo">1</span></div><div class="receipt-main-title">पावती</div><div class="badge">दिनांक<br><span id="pDate">-</span></div></div><table class="r-table"><tr><td>वर्गणीदाराचे नाव</td><td id="pName">________________</td></tr><tr><td>मोबाईल नंबर</td><td id="pMobile">________________</td></tr><tr><td>रक्कम</td><td id="pAmount">₹ __________</td></tr><tr><td>Payment Mode</td><td id="pPayment">________________</td></tr><tr><td>पावती प्रकार</td><td id="pType">वर्गणी</td></tr><tr><td>Transaction ID</td><td id="pTxn">________________</td></tr></table><div class="thanks">🙏 वर्गणी दिल्याबद्दल मनःपूर्वक धन्यवाद! 🙏</div><div class="r-foot"><div><b>🪔 हिंदवी.. एक संस्कार, एक विचार!</b></div><div class="treasurer"><div><b>खजिनदार नाव:</b> <span id="pTreasurer">________________</span></div><div class="sign-line">खजिनदाराची सही</div></div></div></div><div class="preview-actions"><button id="downloadBtn2" class="green">⬇️ फोटो Download</button><button id="sharePhotoBtn2" class="purple">📤 फोटो Share</button><button id="whatsappBtn2" class="whatsapp wide">📱 WhatsApp वर पाठवा</button></div><p class="small">टीप: Acode file:// Preview मध्ये Photo Share बंद असू शकतो. Download करून Gallery/Files मधून Share करा.</p></div></div></div>
+/* ================= HEADER ================= */
 
-<div id="memberPage" class="container hidden"><div class="card"><h2 class="section-title">👥 वर्गणीदार यादी</h2><input id="memberSearch" placeholder="नाव किंवा मोबाईल नंबर शोधा"><div id="memberList"></div><button class="dark" data-back>⬅️ Dashboard</button></div></div>
-<div id="expensePage" class="container hidden"><div class="card"><h2 class="section-title">💸 खर्च नोंद</h2><input id="expenseTitle" placeholder="खर्चाचे कारण"><input id="expenseAmount" type="number" placeholder="खर्च रक्कम ₹"><input id="expenseDate" type="date"><textarea id="expenseNote" placeholder="टीप"></textarea><button id="saveExpenseBtn" class="green">💾 खर्च Save करा</button><button class="dark" data-back>⬅️ Dashboard</button><div id="expenseMessage" class="message"></div></div></div>
-<div id="reportPage" class="container hidden"><div class="card"><h2 class="section-title">📊 Reports</h2><div class="stats"><div class="stat">💰<strong id="reportIncome">₹0</strong>एकूण जमा</div><div class="stat">💸<strong id="reportExpense">₹0</strong>एकूण खर्च</div><div class="stat">💵<strong id="reportBalance">₹0</strong>शिल्लक</div></div><div id="reportList"></div><button class="dark" data-back>⬅️ Dashboard</button></div></div>
-<div id="settingsPage" class="container hidden"><div class="card"><h2 class="section-title">⚙️ मंडळ Settings</h2><label>👤 खजिनदाराचे नाव</label><input id="treasurerName" placeholder="खजिनदाराचे नाव टाका"><p class="small">हे नाव पावतीच्या खालच्या भागात आपोआप दिसेल.</p><button id="saveSettingsBtn" class="green">💾 Settings Save करा</button><button class="dark" data-back>⬅️ Dashboard</button><div id="settingsMessage" class="message"></div></div></div>
+.header{
+  background:linear-gradient(135deg,#5b0808,#a31313,#6d0909);
+  color:#fff;
+  text-align:center;
+  padding:18px 12px;
+  border-bottom:4px solid #d4a72c;
+}
 
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+.header h1{
+  margin:0;
+  font-size:25px;
+}
+
+.header p{
+  margin:7px 0 0;
+  font-size:16px;
+}
+
+/* ================= CONTAINER ================= */
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:15px;
+}
+
+.card{
+  background:#fff;
+  padding:20px;
+  border-radius:16px;
+  margin-top:15px;
+  box-shadow:0 3px 15px rgba(0,0,0,.10);
+}
+
+/* ================= INPUT ================= */
+
+input,select,textarea{
+  width:100%;
+  padding:13px;
+  margin:7px 0;
+  border:1px solid #d5d5d5;
+  border-radius:9px;
+  font-size:16px;
+  background:#fff;
+}
+
+textarea{
+  min-height:75px;
+  resize:vertical;
+}
+
+/* ================= BUTTON ================= */
+
+button{
+  width:100%;
+  padding:14px;
+  margin-top:8px;
+  border:none;
+  border-radius:9px;
+  color:#fff;
+  background:#8d1010;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:active{
+  transform:scale(.98);
+}
+
+.green{background:#16803c;}
+.blue{background:#1768ad;}
+.orange{background:#d97913;}
+.purple{background:#673ab7;}
+.back{background:#666;}
+.cancel{background:#c62828;}
+.logout{background:#222;}
+.whatsapp{background:#25D366;}
+.teal{background:#087f8c;}
+.darkblue{background:#3949ab;}
+.red{background:#b71c1c;}
+
+/* ================= MESSAGE ================= */
+
+.message{
+  text-align:center;
+  margin-top:12px;
+  font-weight:bold;
+}
+
+.error{color:#c62828;}
+.success{color:#16803c;}
+
+/* ================= DASHBOARD ================= */
+
+.dashboard{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-top:15px;
+}
+
+.box{
+  background:#fff;
+  border-radius:15px;
+  padding:18px 10px;
+  text-align:center;
+  box-shadow:0 2px 10px rgba(0,0,0,.09);
+}
+
+.box .emoji{
+  font-size:27px;
+}
+
+.box h3{
+  margin:8px 0 4px;
+  font-size:24px;
+  color:#7c1d1d;
+}
+
+.box p{
+  margin:0;
+  color:#555;
+}
+
+.role{
+  display:inline-block;
+  background:#eee;
+  padding:7px 13px;
+  border-radius:20px;
+  font-weight:bold;
+}
+
+/* ================= MENU ================= */
+
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.menu-grid button{
+  margin:0;
+}
+
+/* ================= RECEIPT ================= */
+
+.receipt-layout{
+  display:grid;
+  grid-template-columns:340px 1fr;
+  gap:18px;
+  align-items:start;
+}
+
+.receipt-preview-wrap{
+  background:#eee;
+  padding:10px;
+  border-radius:12px;
+  overflow:auto;
+}
+
+.receipt-preview-title{
+  text-align:center;
+  font-size:20px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.receipt{
+  width:100%;
+  max-width:760px;
+  margin:auto;
+  background:#fffdf7;
+  border:3px solid #8d1010;
+  padding:12px;
+  color:#222;
+}
+
+.receipt-inner{
+  border:1px solid #c49a28;
+  padding:14px;
+  min-height:620px;
+}
+
+.receipt-top{
+  display:grid;
+  grid-template-columns:90px 1fr 90px;
+  gap:10px;
+  align-items:center;
+  text-align:center;
+}
+
+.receipt-logo{
+  width:80px;
+  height:80px;
+  margin:auto;
+  border:2px solid #8d1010;
+  border-radius:8px;
+  overflow:hidden;
+  background:#eee;
+}
+
+.receipt-logo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.receipt-symbol{
+  width:75px;
+  height:75px;
+  border-radius:50%;
+  background:#8d1010;
+  color:#ffd54f;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:auto;
+  font-size:38px;
+  border:4px solid #e0b333;
+}
+
+.receipt-title h2{
+  margin:0;
+  color:#8d1010;
+  font-size:24px;
+}
+
+.receipt-title h3{
+  margin:5px 0;
+  font-size:17px;
+}
+
+.receipt-title p{
+  margin:0;
+  font-size:13px;
+  font-weight:bold;
+}
+
+.receipt-badge{
+  text-align:center;
+  margin:15px 0;
+}
+
+.receipt-badge span{
+  display:inline-block;
+  background:#8d1010;
+  color:#fff;
+  padding:9px 38px;
+  font-size:24px;
+  font-weight:bold;
+  border-radius:7px;
+  border:3px solid #d3a62c;
+}
+
+.receipt-meta{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.meta-box{
+  border:1px solid #8d1010;
+  padding:8px 14px;
+  min-width:140px;
+  text-align:center;
+  border-radius:7px;
+}
+
+.meta-box b{
+  display:block;
+  font-size:13px;
+}
+
+.meta-box span{
+  font-size:17px;
+  font-weight:bold;
+}
+
+.receipt-table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:12px;
+}
+
+.receipt-table td{
+  border:1px solid #cdbb8b;
+  padding:9px;
+  font-size:15px;
+}
+
+.receipt-table td:first-child{
+  width:34%;
+  font-weight:bold;
+  background:#fff8e8;
+}
+
+.thanks{
+  margin-top:14px;
+  text-align:center;
+  background:#8d1010;
+  color:#fff;
+  padding:11px;
+  font-size:17px;
+  font-weight:bold;
+  border-radius:6px;
+}
+
+.receipt-footer{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+  margin-top:18px;
+  align-items:end;
+}
+
+.treasurer{
+  text-align:center;
+}
+
+.treasurer-line{
+  margin-top:25px;
+  border-top:1px solid #333;
+  padding-top:5px;
+}
+
+/* ================= LIST ================= */
+
+.item{
+  background:#fafafa;
+  border:1px solid #ddd;
+  border-radius:10px;
+  padding:13px;
+  margin:10px 0;
+}
+
+.item b{
+  color:#7c1d1d;
+}
+
+.total{
+  padding:13px;
+  background:#fafafa;
+  border-radius:9px;
+  font-size:18px;
+  font-weight:bold;
+  margin:8px 0;
+}
+
+.expense-item{
+  border-left:5px solid #d97913;
+}
+
+.filter-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:800px){
+
+  .dashboard{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .menu-grid{
+    grid-template-columns:1fr;
+  }
+
+  .receipt-layout{
+    grid-template-columns:1fr;
+  }
+
+  .receipt{
+    min-width:620px;
+  }
+
+}
+
+@media(max-width:450px){
+
+  .dashboard{
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+
+  .box h3{
+    font-size:19px;
+  }
+
+  .card{
+    padding:15px;
+  }
+
+  .filter-grid{
+    grid-template-columns:1fr;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h1>🪔 हिंदवी कला व क्रीडा सांस्कृतिक मंडळ 🪔</h1>
+  <p>मंडळ पावती बुक 2026</p>
+</div>
+
+
+<!-- LOGIN -->
+
+<div id="loginPage" class="container">
+
+  <div class="card">
+
+    <h2>🔐 Admin / Worker Login</h2>
+
+    <input type="email" id="email" placeholder="Email टाका">
+
+    <input type="password" id="password" placeholder="Password टाका">
+
+    <button id="loginBtn">🔐 Login</button>
+
+    <div id="loginMessage" class="message"></div>
+
+  </div>
+
+</div>
+
+
+<!-- DASHBOARD -->
+
+<div id="dashboardPage" class="container hidden">
+
+  <div class="card">
+
+    <h2>👋 स्वागत आहे</h2>
+
+    <p>Email: <b id="userEmail"></b></p>
+
+    <p>
+      Role:
+      <span id="userRole" class="role"></span>
+    </p>
+
+  </div>
+
+
+  <div class="dashboard">
+
+    <div class="box">
+      <div class="emoji">💰</div>
+      <h3 id="totalIncome">₹0</h3>
+      <p>एकूण जमा</p>
+    </div>
+
+    <div class="box">
+      <div class="emoji">💸</div>
+      <h3 id="totalExpense">₹0</h3>
+      <p>एकूण खर्च</p>
+    </div>
+
+    <div class="box">
+      <div class="emoji">💵</div>
+      <h3 id="balance">₹0</h3>
+      <p>शिल्लक</p>
+    </div>
+
+    <div class="box">
+      <div class="emoji">🧾</div>
+      <h3 id="receiptCount">0</h3>
+      <p>एकूण पावत्या</p>
+    </div>
+
+    <div class="box">
+      <div class="emoji">👥</div>
+      <h3 id="memberCount">0</h3>
+      <p>वर्गणीदार</p>
+    </div>
+
+    <div class="box">
+      <div class="emoji">❌</div>
+      <h3 id="cancelCount">0</h3>
+      <p>Cancel पावत्या</p>
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <h2>📋 App Menu</h2>
+
+    <div class="menu-grid">
+
+      <button id="receiptBtn">🧾 नवीन पावती</button>
+
+      <button id="searchReceiptBtn" class="blue">
+        🔍 पावती शोधा / WhatsApp
+      </button>
+
+      <button id="memberBtn">👥 वर्गणीदार</button>
+
+      <button id="expenseBtn" class="orange">
+        💸 खर्च नोंद
+      </button>
+
+      <button id="reportBtn" class="purple">
+        📊 रिपोर्ट
+      </button>
+
+      <button id="cancelReceiptBtn" class="cancel">
+        ❌ पावती रद्द
+      </button>
+
+      <button id="settingsBtn" class="teal">
+        ⚙️ मंडळ Settings
+      </button>
+
+      <button id="logoutBtn" class="logout">
+        🚪 Logout
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- NEW RECEIPT -->
+
+<div id="receiptPage" class="container hidden">
+
+<div class="receipt-layout">
+
+<div class="card">
+
+<h2>🧾 नवीन पावती</h2>
+
+<div class="total">
+पावती क्रमांक:
+<span id="receiptNumber">1</span>
+</div>
+
+<label>👤 वर्गणीदाराचे पूर्ण नाव</label>
+<input type="text" id="memberName">
+
+<label>📱 मोबाईल नंबर</label>
+<input type="tel" id="mobile" maxlength="10">
+
+<label>💰 रक्कम ₹</label>
+<input type="number" id="amount">
+
+<label>💳 Payment Mode</label>
+<select id="paymentMode">
+<option value="">निवडा</option>
+<option value="Cash">💵 Cash</option>
+<option value="UPI">📱 UPI</option>
+<option value="Online">🌐 Online</option>
+</select>
+
+<label>🔢 UPI / Transaction ID</label>
+<input type="text" id="transactionId">
+
+<label>🧾 पावती प्रकार</label>
+<select id="receiptType">
+<option value="वर्गणी">🪔 वर्गणी</option>
+<option value="देणगी">🙏 देणगी</option>
+<option value="विशेष वर्गणी">⭐ विशेष वर्गणी</option>
+<option value="इतर">📝 इतर</option>
+</select>
+
+<label>📅 दिनांक</label>
+<input type="date" id="receiptDate">
+
+<label>📝 टीप</label>
+<textarea id="note"></textarea>
+
+<button id="saveReceiptBtn" class="green">
+💾 पावती Save करा
+</button>
+
+<button id="downloadReceiptBtn" class="blue">
+⬇️ पावती फोटो Download करा
+</button>
+
+<button id="shareImageBtn" class="purple">
+📤 फोटो Share करा
+</button>
+
+<button id="whatsappBtn" class="whatsapp">
+📱 WhatsApp वर पाठवा
+</button>
+
+<button id="backReceiptBtn" class="back">
+⬅️ Dashboard
+</button>
+
+<div id="receiptMessage" class="message"></div>
+
+</div>
+
+
+<div class="receipt-preview-wrap">
+
+<div class="receipt-preview-title">
+पावतीचा प्रिंट / फोटो प्रिव्ह्यू
+</div>
+
+<div id="receiptDesign" class="receipt">
+
+<div class="receipt-inner">
+
+<div class="receipt-top">
+
+<div class="receipt-logo">
+<img id="mandalLogoPreview" src="" alt="">
+</div>
+
+<div class="receipt-title">
+
+<h2 id="previewMandalName">
+हिंदवी कला व क्रीडा सांस्कृतिक मंडळ
+</h2>
+
+<h3>मंडळ पावती बुक 2026</h3>
+
+<p id="previewAddress">
+भवानी चौक, संगमनेर पोलीस स्टेशन जवळ
+</p>
+
+</div>
+
+<div class="receipt-symbol">🔥</div>
+
+</div>
+
+<div class="receipt-badge">
+<span>पावती</span>
+</div>
+
+<div class="receipt-meta">
+
+<div class="meta-box">
+<b>पावती क्रमांक</b>
+<span id="previewReceiptNo">1</span>
+</div>
+
+<div class="meta-box">
+<b>दिनांक</b>
+<span id="previewDate">-</span>
+</div>
+
+</div>
+
+<table class="receipt-table">
+
+<tr>
+<td>वर्गणीदाराचे नाव</td>
+<td id="previewName">________________</td>
+</tr>
+
+<tr>
+<td>मोबाईल नंबर</td>
+<td id="previewMobile">________________</td>
+</tr>
+
+<tr>
+<td>पावती प्रकार</td>
+<td id="previewType">वर्गणी</td>
+</tr>
+
+<tr>
+<td>रक्कम</td>
+<td id="previewAmount">₹0</td>
+</tr>
+
+<tr>
+<td>Payment Mode</td>
+<td id="previewPayment">________________</td>
+</tr>
+
+<tr>
+<td>Transaction ID</td>
+<td id="previewTransaction">________________</td>
+</tr>
+
+<tr>
+<td>टीप</td>
+<td id="previewNote">________________</td>
+</tr>
+
+</table>
+
+<div class="thanks">
+🙏 वर्गणी दिल्याबद्दल मनःपूर्वक धन्यवाद! 🙏
+</div>
+
+<div class="receipt-footer">
+
+<div>
+<b>🪔 हिंदवी...</b><br>
+एक संस्कार, एक विचार!
+</div>
+
+<div class="treasurer">
+
+<b>खजिनदाराचे नाव</b>
+
+<div class="treasurer-line">
+<span id="previewTreasurer">
+__________________
+</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+
+<!-- MEMBERS -->
+
+<div id="memberPage" class="container hidden">
+
+<div class="card">
+
+<h2>👥 वर्गणीदार यादी</h2>
+
+<input id="memberSearch"
+placeholder="🔍 नाव किंवा मोबाईल नंबर शोधा">
+
+<div id="memberList"></div>
+
+<button id="memberPdfBtn" class="purple">
+📄 वर्गणीदार यादी PDF
+</button>
+
+<button id="backMemberBtn" class="back">
+⬅️ Dashboard
+</button>
+
+</div>
+
+</div>
+
+
+<!-- EXPENSE -->
+
+<div id="expensePage" class="container hidden">
+
+<div class="card">
+
+<h2>💸 खर्च नोंद</h2>
+
+<input id="expenseTitle"
+placeholder="खर्चाचे कारण">
+
+<input id="expenseAmount"
+type="number"
+placeholder="खर्च रक्कम ₹">
+
+<input id="expenseDate"
+type="date">
+
+<textarea id="expenseNote"
+placeholder="टीप (ऐच्छिक)"></textarea>
+
+<button id="saveExpenseBtn" class="green">
+💾 खर्च Save करा
+</button>
+
+<button id="backExpenseBtn" class="back">
+⬅️ Dashboard
+</button>
+
+<div id="expenseMessage" class="message"></div>
+
+</div>
+
+</div>
+
+
+<!-- REPORT -->
+
+<div id="reportPage" class="container hidden">
+
+<div class="card">
+
+<h2>📊 पूर्ण आर्थिक रिपोर्ट</h2>
+
+<div class="filter-grid">
+
+<div>
+<label>📅 सुरुवातीची तारीख</label>
+<input type="date" id="reportFrom">
+</div>
+
+<div>
+<label>📅 शेवटची तारीख</label>
+<input type="date" id="reportTo">
+</div>
+
+</div>
+
+<button id="filterReportBtn" class="blue">
+🔍 Date Filter लावा
+</button>
+
+<button id="clearFilterBtn" class="back">
+♻️ Filter Clear करा
+</button>
+
+<div class="total">
+💰 एकूण जमा:
+<span id="reportIncome">₹0</span>
+</div>
+
+<div class="total">
+💸 एकूण खर्च:
+<span id="reportExpense">₹0</span>
+</div>
+
+<div class="total">
+💵 शिल्लक:
+<span id="reportBalance">₹0</span>
+</div>
+
+<div class="total">
+💵 Cash जमा:
+<span id="reportCash">₹0</span>
+</div>
+
+<div class="total">
+📱 UPI जमा:
+<span id="reportUpi">₹0</span>
+</div>
+
+<div class="total">
+🌐 Online जमा:
+<span id="reportOnline">₹0</span>
+</div>
+
+<hr>
+
+<h3>🧾 पावत्या</h3>
+
+<div id="reportList"></div>
+
+<hr>
+
+<h3>💸 खर्चाचा तपशील</h3>
+
+<div id="expenseReportList"></div>
+
+<hr>
+
+<h3>📄 PDF Download</h3>
+
+<button id="receiptsPdfBtn" class="blue">
+🧾 सर्व पावत्या PDF
+</button>
+
+<button id="expensesPdfBtn" class="orange">
+💸 खर्च रिपोर्ट PDF
+</button>
+
+<button id="fullReportPdfBtn" class="purple">
+📊 पूर्ण आर्थिक अहवाल PDF
+</button>
+
+<button id="backReportBtn" class="back">
+⬅️ Dashboard
+</button>
+
+</div>
+
+</div>
+
+
+<!-- SETTINGS -->
+
+<div id="settingsPage" class="container hidden">
+
+<div class="card">
+
+<h2>⚙️ मंडळ Settings</h2>
+
+<label>🪔 मंडळाचे नाव</label>
+<input id="settingMandalName">
+
+<label>📍 मंडळाचा पत्ता</label>
+<input id="settingAddress">
+
+<label>👨‍💼 खजिनदाराचे नाव</label>
+<input id="treasurerName">
+
+<label>🖼️ Logo Image URL</label>
+<input id="mandalLogo">
+
+<button id="saveSettingsBtn" class="green">
+💾 Settings Save करा
+</button>
+
+<button id="backSettingsBtn" class="back">
+⬅️ Dashboard
+</button>
+
+<div id="settingsMessage" class="message"></div>
+
+</div>
+
+</div>
+
+
 <script type="module">
-import{initializeApp}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-import{getAuth,signInWithEmailAndPassword,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-import{getDatabase,ref,push,set,get,update,runTransaction}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
-const firebaseConfig={apiKey:"AIzaSyCJteCES9LUBs6O9lD9XN4hUIwq21Xj5AE",authDomain:"mandal-book-60a8b.firebaseapp.com",databaseURL:"https://mandal-book-60a8b-default-rtdb.asia-southeast1.firebasedatabase.app",projectId:"mandal-book-60a8b",storageBucket:"mandal-book-60a8b.firebasestorage.app",messagingSenderId:"949132975149",appId:"1:949132975149:web:b194b2bab6bb513cc0eca4"};
-const ADMIN_EMAIL="ganganenilesh496@gmail.com",app=initializeApp(firebaseConfig),auth=getAuth(app),db=getDatabase(app),$=id=>document.getElementById(id),money=n=>"₹"+Number(n||0).toLocaleString("en-IN"),today=()=>new Date().toISOString().split("T")[0];let currentTreasurer="";
-const admin=()=>auth.currentUser&&auth.currentUser.email.toLowerCase()===ADMIN_EMAIL.toLowerCase();
-function hideAll(){document.querySelectorAll(".container").forEach(x=>x.classList.add("hidden"))}function showPage(id){hideAll();$(id).classList.remove("hidden");scrollTo(0,0)}
-async function loadSettings(){try{const s=await get(ref(db,"settings/treasurerName"));currentTreasurer=s.exists()?String(s.val()||""):"";$("treasurerName").value=currentTreasurer;$("pTreasurer").textContent=currentTreasurer||"________________"}catch(e){}}
-function updatePreview(){$("pNo").textContent=$("receiptNumber").textContent;$("pDate").textContent=$("receiptDate").value||"-";$("pName").textContent=$("memberName").value.trim()||"________________";$("pMobile").textContent=$("mobile").value.trim()||"________________";$("pAmount").textContent=$("amount").value?money($("amount").value):"₹ __________";$("pPayment").textContent=$("paymentMode").value||"________________";$("pType").textContent=$("receiptType").value||"वर्गणी";$("pTxn").textContent=$("transactionId").value.trim()||"________________";$("pTreasurer").textContent=currentTreasurer||"________________"}
-["memberName","mobile","amount","transactionId"].forEach(i=>$(i).oninput=updatePreview);["paymentMode","receiptType","receiptDate"].forEach(i=>$(i).onchange=updatePreview);
-$("loginBtn").onclick=async()=>{try{await signInWithEmailAndPassword(auth,$("email").value.trim(),$("password").value)}catch(e){$("loginMessage").className="message error";$("loginMessage").textContent="❌ "+e.message}};
-onAuthStateChanged(auth,async u=>{if(!u){showPage("loginPage");return}await loadSettings();$("userEmail").textContent=u.email;$("userRole").textContent=admin()?"ADMIN 👑":"WORKER 👤";["expenseBtn","reportBtn","cancelReceiptBtn","settingsBtn"].forEach(i=>$(i).style.display=admin()?"block":"none");await loadDashboard();showPage("dashboardPage")});
-async function loadDashboard(){const rs=await get(ref(db,"receipts")),es=await get(ref(db,"expenses"));let income=0,count=0,cancel=0,expense=0;const mem=new Set;if(rs.exists())rs.forEach(c=>{let d=c.val()||{};if(d.status==="cancelled"){cancel++;return}income+=+d.amount||0;count++;mem.add(d.mobile||d.name||c.key)});if(es.exists())es.forEach(c=>expense+=+(c.val()?.amount||0));$("totalIncome").textContent=money(income);$("totalExpense").textContent=money(expense);$("balance").textContent=money(income-expense);$("receiptCount").textContent=count;$("memberCount").textContent=mem.size;$("cancelCount").textContent=cancel}
-$("receiptBtn").onclick=async()=>{["memberName","mobile","address","amount","transactionId","note"].forEach(i=>$(i).value="");$("paymentMode").value="";$("receiptType").value="वर्गणी";$("receiptDate").value=today();let s=await get(ref(db,"receiptCounter"));$("receiptNumber").textContent=+(s.exists()?s.val()||0:0)+1;updatePreview();showPage("receiptPage")};
-$("saveReceiptBtn").onclick=async()=>{let n=$("memberName").value.trim(),m=$("mobile").value.replace(/\D/g,""),a=+$("amount").value;if(!n||m.length!==10||a<=0||!$("paymentMode").value){$("receiptMessage").className="message error";$("receiptMessage").textContent="⚠️ नाव, 10 अंकी मोबाईल, रक्कम आणि Payment Mode भरा.";return}try{let t=await runTransaction(ref(db,"receiptCounter"),v=>+(v||0)+1),no=t.snapshot.val(),d={receiptNo:no,name:n,mobile:$("mobile").value.trim(),address:$("address").value.trim(),amount:a,paymentMode:$("paymentMode").value,transactionId:$("transactionId").value.trim(),receiptType:$("receiptType").value,note:$("note").value.trim(),date:$("receiptDate").value,status:"active",createdAt:new Date().toISOString(),createdBy:auth.currentUser.email};await set(push(ref(db,"receipts")),d);$("receiptNumber").textContent=no;updatePreview();$("receiptMessage").className="message success";$("receiptMessage").textContent="✅ पावती क्रमांक "+no+" Save झाली!";loadDashboard()}catch(e){$("receiptMessage").className="message error";$("receiptMessage").textContent="❌ "+e.message}};
-async function canvas(){if(!window.html2canvas)throw Error("Internet ON करा.");return await html2canvas($("receiptPreview"),{scale:2,useCORS:true,backgroundColor:"#fffdf8"})}
-async function download(){try{let c=await canvas();c.toBlob(b=>{let u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="hindavi_pavti_"+$("pNo").textContent+".png";document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),2000)},"image/png")}catch(e){alert("❌ Download Error: "+e.message)}}
-async function share(){try{let c=await canvas(),b=await new Promise(r=>c.toBlob(r,"image/png")),f=new File([b],"hindavi_pavti.png",{type:"image/png"});if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({title:"हिंदवी मंडळ पावती",files:[f]})}else alert("या Acode Preview मध्ये Photo Share नाही. आधी Download करा.")}catch(e){if(e.name!=="AbortError")alert("❌ "+e.message)}}
-function wa(){let m=$("mobile").value.replace(/\D/g,"");if(m.length!==10){alert("⚠️ 10 अंकी मोबाईल नंबर टाका.");return}let x=`🪔 *हिंदवी कला व क्रीडा सांस्कृतिक मंडळ*\n📍 भवानी चौक, संगमनेर • पोलीस स्टेशन जवळ\n\n🧾 *पावती क्रमांक:* ${$("pNo").textContent}\n👤 *वर्गणीदार:* ${$("memberName").value||"-"}\n💰 *रक्कम:* ${$("pAmount").textContent}\n💳 *Payment Mode:* ${$("paymentMode").value||"-"}\n📅 *दिनांक:* ${$("receiptDate").value||"-"}\n\n🙏 वर्गणी दिल्याबद्दल मनःपूर्वक धन्यवाद!`;open("https://wa.me/91"+m+"?text="+encodeURIComponent(x),"_blank")}
-["downloadBtn","downloadBtn2"].forEach(i=>$(i).onclick=download);["sharePhotoBtn","sharePhotoBtn2"].forEach(i=>$(i).onclick=share);["whatsappBtn","whatsappBtn2"].forEach(i=>$(i).onclick=wa);
-$("searchReceiptBtn").onclick=async()=>{let no=prompt("पावती क्रमांक टाका:");if(!no)return;let s=await get(ref(db,"receipts")),f=null;s.exists()&&s.forEach(c=>{let d=c.val();if(+d?.receiptNo===+no)f=d});if(!f||f.status==="cancelled"){alert("❌ पावती सापडली नाही / Cancel आहे.");return}alert(`🧾 पावती: ${f.receiptNo}\n👤 ${f.name}\n💰 ${money(f.amount)}`)};
-$("memberBtn").onclick=async()=>{showPage("memberPage");let s=await get(ref(db,"receipts")),o={};s.exists()&&s.forEach(c=>{let d=c.val()||{};if(d.status==="cancelled")return;let k=d.mobile||d.name;if(!o[k])o[k]={name:d.name,mobile:d.mobile,total:0};o[k].total+=+d.amount||0});$("memberList").innerHTML=Object.values(o).map(x=>`<div class="item">👤 <b>${x.name}</b><br>📱 ${x.mobile}<br>💰 एकूण: <b>${money(x.total)}</b></div>`).join("")||"अजून वर्गणीदार नाहीत."};
-$("memberSearch").oninput=function(){let q=this.value.toLowerCase();document.querySelectorAll("#memberList .item").forEach(x=>x.style.display=x.innerText.toLowerCase().includes(q)?"block":"none")};
-$("expenseBtn").onclick=()=>{["expenseTitle","expenseAmount","expenseNote"].forEach(i=>$(i).value="");$("expenseDate").value=today();showPage("expensePage")};$("saveExpenseBtn").onclick=async()=>{if(!admin())return;let title=$("expenseTitle").value.trim(),amount=+$("expenseAmount").value,date=$("expenseDate").value;if(!title||amount<=0||!date){alert("⚠️ माहिती भरा.");return}await set(push(ref(db,"expenses")),{title,amount,date,note:$("expenseNote").value.trim(),createdAt:new Date().toISOString()});$("expenseMessage").className="message success";$("expenseMessage").textContent="✅ खर्च Save झाला!";loadDashboard()};
-$("reportBtn").onclick=async()=>{showPage("reportPage");let rs=await get(ref(db,"receipts")),es=await get(ref(db,"expenses")),i=0,e=0,h="";rs.exists()&&rs.forEach(c=>{let d=c.val()||{};if(d.status!=="cancelled"){i+=+d.amount||0;h+=`<div class="item">🧾 #${d.receiptNo} • ${d.name} • <b>${money(d.amount)}</b></div>`}});es.exists()&&es.forEach(c=>e+=+(c.val()?.amount||0));$("reportIncome").textContent=money(i);$("reportExpense").textContent=money(e);$("reportBalance").textContent=money(i-e);$("reportList").innerHTML=h||"अजून पावत्या नाहीत."};
-$("cancelReceiptBtn").onclick=async()=>{let no=prompt("Cancel पावती क्रमांक:");if(!no)return;let s=await get(ref(db,"receipts")),k="";s.exists()&&s.forEach(c=>{if(+c.val()?.receiptNo===+no)k=c.key});if(!k){alert("❌ सापडली नाही.");return}if(confirm("Cancel करायची का?")){await update(ref(db,"receipts/"+k),{status:"cancelled",cancelledAt:new Date().toISOString()});alert("✅ Cancel झाली.");loadDashboard()}};
-$("settingsBtn").onclick=async()=>{await loadSettings();showPage("settingsPage")};$("saveSettingsBtn").onclick=async()=>{currentTreasurer=$("treasurerName").value.trim();await set(ref(db,"settings/treasurerName"),currentTreasurer);$("pTreasurer").textContent=currentTreasurer||"________________";$("settingsMessage").className="message success";$("settingsMessage").textContent="✅ खजिनदाराचे नाव Save झाले!"};
-$("backReceiptBtn").onclick=()=>showPage("dashboardPage");document.querySelectorAll("[data-back]").forEach(x=>x.onclick=()=>showPage("dashboardPage"));$("logoutBtn").onclick=()=>signOut(auth);
-</script></body></html>
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+getAuth,
+signInWithEmailAndPassword,
+onAuthStateChanged,
+signOut
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+import {
+getDatabase,
+ref,
+push,
+set,
+get,
+update,
+remove,
+runTransaction
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
+
+
+/* ================= FIREBASE ================= */
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyCJteCES9LUBs6O9lD9XN4hUIwq21Xj5AE",
+
+authDomain:"mandal-book-60a8b.firebaseapp.com",
+
+databaseURL:"https://mandal-book-60a8b-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+projectId:"mandal-book-60a8b",
+
+storageBucket:"mandal-book-60a8b.firebasestorage.app",
+
+messagingSenderId:"949132975149",
+
+appId:"1:949132975149:web:b194b2bab6bb513cc0eca4"
+
+};
+
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getDatabase(app);
+
+const ADMIN_EMAIL="ganganenilesh496@gmail.com";
+
+
+let appSettings={
+mandalName:"हिंदवी कला व क्रीडा सांस्कृतिक मंडळ",
+address:"भवानी चौक, संगमनेर पोलीस स्टेशन जवळ",
+treasurerName:"",
+logo:""
+};
+
+let lastSavedReceipt=null;
+let allReceipts=[];
+let allExpenses=[];
+
+
+/* ================= BASIC FUNCTIONS ================= */
+
+function hideAll(){
+document.querySelectorAll(".container").forEach(p=>{
+p.classList.add("hidden");
+});
+}
+
+function showPage(id){
+hideAll();
+document.getElementById(id).classList.remove("hidden");
+}
+
+function formatAmount(amount){
+return "₹"+Number(amount||0).toLocaleString("en-IN");
+}
+
+function today(){
+const d=new Date();
+return d.getFullYear()+"-"+
+String(d.getMonth()+1).padStart(2,"0")+"-"+
+String(d.getDate()).padStart(2,"0");
+}
+
+function formatDate(date){
+
+if(!date) return "-";
+
+const p=date.split("-");
+
+if(p.length!==3) return date;
+
+return p[2]+"/"+p[1]+"/"+p[0];
+
+}
+
+function isAdmin(){
+
+return auth.currentUser &&
+auth.currentUser.email.toLowerCase()===
+ADMIN_EMAIL.toLowerCase();
+
+}
+
+
+/* ================= SETTINGS ================= */
+
+async function loadSettings(){
+
+const snap=await get(ref(db,"settings"));
+
+if(snap.exists()){
+appSettings={...appSettings,...snap.val()};
+}
+
+updateReceiptPreview();
+
+}
+
+function updateReceiptHeader(){
+
+document.getElementById("previewMandalName").innerText=
+appSettings.mandalName;
+
+document.getElementById("previewAddress").innerText=
+appSettings.address;
+
+document.getElementById("previewTreasurer").innerText=
+appSettings.treasurerName||"__________________";
+
+const logo=document.getElementById("mandalLogoPreview");
+
+if(appSettings.logo){
+logo.src=appSettings.logo;
+logo.style.display="block";
+}else{
+logo.style.display="none";
+}
+
+}
+
+
+/* ================= RECEIPT PREVIEW ================= */
+
+function updateReceiptPreview(){
+
+updateReceiptHeader();
+
+const getValue=id=>document.getElementById(id).value;
+
+document.getElementById("previewReceiptNo").innerText=
+document.getElementById("receiptNumber").innerText;
+
+document.getElementById("previewName").innerText=
+getValue("memberName")||"________________";
+
+document.getElementById("previewMobile").innerText=
+getValue("mobile")||"________________";
+
+document.getElementById("previewAmount").innerText=
+formatAmount(getValue("amount"));
+
+document.getElementById("previewPayment").innerText=
+getValue("paymentMode")||"________________";
+
+document.getElementById("previewTransaction").innerText=
+getValue("transactionId")||"________________";
+
+document.getElementById("previewType").innerText=
+getValue("receiptType");
+
+document.getElementById("previewNote").innerText=
+getValue("note")||"________________";
+
+document.getElementById("previewDate").innerText=
+formatDate(getValue("receiptDate"));
+
+}
+
+
+/* ================= LOGIN ================= */
+
+document.getElementById("loginBtn").onclick=async()=>{
+
+const email=document.getElementById("email").value.trim();
+const password=document.getElementById("password").value;
+
+if(!email||!password){
+document.getElementById("loginMessage").innerText=
+"⚠️ Email आणि Password टाका.";
+return;
+}
+
+try{
+
+document.getElementById("loginMessage").innerText=
+"⏳ Login होत आहे...";
+
+await signInWithEmailAndPassword(auth,email,password);
+
+}catch(e){
+
+document.getElementById("loginMessage").innerText=
+"❌ "+e.message;
+
+}
+
+};
+
+
+/* ================= AUTH ================= */
+
+onAuthStateChanged(auth,async user=>{
+
+if(user){
+
+await loadSettings();
+await showDashboard(user);
+
+}else{
+
+showPage("loginPage");
+
+}
+
+});
+
+
+/* ================= DASHBOARD ================= */
+
+async function showDashboard(user){
+
+showPage("dashboardPage");
+
+document.getElementById("userEmail").innerText=user.email;
+
+if(isAdmin()){
+
+document.getElementById("userRole").innerText="ADMIN 👑";
+
+["expenseBtn","reportBtn","cancelReceiptBtn","settingsBtn"]
+.forEach(id=>document.getElementById(id).style.display="block");
+
+}else{
+
+document.getElementById("userRole").innerText="WORKER 👤";
+
+["expenseBtn","reportBtn","cancelReceiptBtn","settingsBtn"]
+.forEach(id=>document.getElementById(id).style.display="none");
+
+}
+
+await loadDashboard();
+
+}
+
+async function loadDashboard(){
+
+const receiptSnap=await get(ref(db,"receipts"));
+const expenseSnap=await get(ref(db,"expenses"));
+
+let income=0;
+let expense=0;
+let active=0;
+let cancelled=0;
+
+const members=new Set();
+
+if(receiptSnap.exists()){
+
+receiptSnap.forEach(child=>{
+
+const d=child.val();
+
+if(d.status==="cancelled"){
+cancelled++;
+}else{
+
+income+=Number(d.amount||0);
+active++;
+members.add(d.mobile||d.name);
+
+}
+
+});
+
+}
+
+if(expenseSnap.exists()){
+
+expenseSnap.forEach(child=>{
+expense+=Number(child.val().amount||0);
+});
+
+}
+
+document.getElementById("totalIncome").innerText=formatAmount(income);
+document.getElementById("totalExpense").innerText=formatAmount(expense);
+document.getElementById("balance").innerText=formatAmount(income-expense);
+document.getElementById("receiptCount").innerText=active;
+document.getElementById("memberCount").innerText=members.size;
+document.getElementById("cancelCount").innerText=cancelled;
+
+}
+
+
+/* ================= NEW RECEIPT ================= */
+
+document.getElementById("receiptBtn").onclick=async()=>{
+
+showPage("receiptPage");
+
+["memberName","mobile","amount","transactionId","note"]
+.forEach(id=>document.getElementById(id).value="");
+
+document.getElementById("paymentMode").value="";
+document.getElementById("receiptType").value="वर्गणी";
+document.getElementById("receiptDate").value=today();
+
+const snap=await get(ref(db,"receiptCounter"));
+
+let next=snap.exists()?Number(snap.val()||0)+1:1;
+
+document.getElementById("receiptNumber").innerText=next;
+
+lastSavedReceipt=null;
+
+updateReceiptPreview();
+
+};
+
+[
+"memberName",
+"mobile",
+"amount",
+"paymentMode",
+"transactionId",
+"receiptType",
+"note",
+"receiptDate"
+].forEach(id=>{
+
+document.getElementById(id).addEventListener(
+"input",updateReceiptPreview);
+
+document.getElementById(id).addEventListener(
+"change",updateReceiptPreview);
+
+});
+
+
+/* ================= SAVE RECEIPT ================= */
+
+document.getElementById("saveReceiptBtn").onclick=async()=>{
+
+const name=document.getElementById("memberName").value.trim();
+
+const mobile=document.getElementById("mobile").value.replace(/\D/g,"");
+
+const amount=Number(document.getElementById("amount").value);
+
+const paymentMode=document.getElementById("paymentMode").value;
+
+const transactionId=document.getElementById("transactionId").value.trim();
+
+const receiptType=document.getElementById("receiptType").value;
+
+const note=document.getElementById("note").value.trim();
+
+const date=document.getElementById("receiptDate").value;
+
+const message=document.getElementById("receiptMessage");
+
+if(!name){
+message.innerText="⚠️ वर्गणीदाराचे नाव टाका.";
+return;
+}
+
+if(mobile.length!==10){
+message.innerText="⚠️ योग्य 10 अंकी मोबाईल नंबर टाका.";
+return;
+}
+
+if(amount<=0){
+message.innerText="⚠️ योग्य रक्कम टाका.";
+return;
+}
+
+if(!paymentMode){
+message.innerText="⚠️ Payment Mode निवडा.";
+return;
+}
+
+try{
+
+message.innerText="⏳ पावती Save होत आहे...";
+
+const result=await runTransaction(
+ref(db,"receiptCounter"),
+current=>Number(current||0)+1
+);
+
+const receiptNo=result.snapshot.val();
+
+const receiptData={
+receiptNo,
+name,
+mobile,
+amount,
+paymentMode,
+transactionId,
+receiptType,
+note,
+date,
+status:"active",
+createdBy:auth.currentUser.email,
+createdAt:new Date().toISOString()
+};
+
+const newRef=push(ref(db,"receipts"));
+
+await set(newRef,receiptData);
+
+lastSavedReceipt={
+...receiptData,
+id:newRef.key
+};
+
+document.getElementById("receiptNumber").innerText=receiptNo;
+
+message.className="message success";
+message.innerText="✅ पावती क्रमांक "+receiptNo+" Save झाली!";
+
+await loadDashboard();
+
+}catch(e){
+
+message.className="message error";
+message.innerText="❌ "+e.message;
+
+}
+
+};
+
+
+/* ================= CURRENT RECEIPT ================= */
+
+function getCurrentReceipt(){
+
+if(lastSavedReceipt) return lastSavedReceipt;
+
+return{
+receiptNo:document.getElementById("receiptNumber").innerText,
+name:document.getElementById("memberName").value,
+mobile:document.getElementById("mobile").value,
+amount:document.getElementById("amount").value,
+paymentMode:document.getElementById("paymentMode").value,
+transactionId:document.getElementById("transactionId").value,
+receiptType:document.getElementById("receiptType").value,
+note:document.getElementById("note").value,
+date:document.getElementById("receiptDate").value
+};
+
+}
+
+
+/* ================= WHATSAPP ================= */
+
+async function shareReceipt(receipt){
+
+let mobile=String(receipt.mobile||"").replace(/\D/g,"");
+
+if(mobile.length===10) mobile="91"+mobile;
+
+const text=
+`🧾 *${appSettings.mandalName}*
+
+📍 ${appSettings.address}
+
+*पावती क्रमांक:* ${receipt.receiptNo}
+*नाव:* ${receipt.name}
+*मोबाईल:* ${receipt.mobile}
+*प्रकार:* ${receipt.receiptType}
+*रक्कम:* ${formatAmount(receipt.amount)}
+*Payment:* ${receipt.paymentMode}
+*Transaction ID:* ${receipt.transactionId||"-"}
+*दिनांक:* ${formatDate(receipt.date)}
+*टीप:* ${receipt.note||"-"}
+
+🙏 धन्यवाद!`;
+
+window.open(
+"https://api.whatsapp.com/send?phone="+
+mobile+
+"&text="+
+encodeURIComponent(text),
+"_blank"
+);
+
+}
+
+document.getElementById("whatsappBtn").onclick=async()=>{
+
+const receipt=getCurrentReceipt();
+
+if(!receipt.name){
+alert("⚠️ आधी पावतीची माहिती भरा.");
+return;
+}
+
+shareReceipt(receipt);
+
+};
+
+
+/* ================= RECEIPT IMAGE ================= */
+
+async function createReceiptCanvas(){
+
+updateReceiptPreview();
+
+return await html2canvas(
+document.getElementById("receiptDesign"),
+{
+scale:2,
+backgroundColor:"#ffffff",
+useCORS:true
+}
+);
+
+}
+
+document.getElementById("downloadReceiptBtn").onclick=async()=>{
+
+const canvas=await createReceiptCanvas();
+
+const link=document.createElement("a");
+
+link.download=
+"Hindavi-Receipt-"+
+document.getElementById("receiptNumber").innerText+
+".png";
+
+link.href=canvas.toDataURL("image/png");
+
+link.click();
+
+};
+
+document.getElementById("shareImageBtn").onclick=async()=>{
+
+const canvas=await createReceiptCanvas();
+
+canvas.toBlob(async blob=>{
+
+const file=new File(
+[blob],
+"Hindavi-Receipt.png",
+{type:"image/png"}
+);
+
+if(navigator.share&&navigator.canShare({files:[file]})){
+
+await navigator.share({
+title:"हिंदवी मंडळ पावती",
+files:[file]
+});
+
+}else{
+
+alert("Photo Share उपलब्ध नाही. Download वापरा.");
+
+}
+
+});
+
+};
+
+
+/* ================= MEMBERS ================= */
+
+document.getElementById("memberBtn").onclick=async()=>{
+
+showPage("memberPage");
+
+await loadMembers();
+
+};
+
+async function getMembersData(){
+
+const snap=await get(ref(db,"receipts"));
+
+const members={};
+
+if(snap.exists()){
+
+snap.forEach(child=>{
+
+const d=child.val();
+
+if(d&&d.status!=="cancelled"){
+
+const key=d.mobile||d.name;
+
+if(!members[key]){
+
+members[key]={
+name:d.name,
+mobile:d.mobile,
+total:0
+};
+
+}
+
+members[key].total+=Number(d.amount||0);
+
+}
+
+});
+
+}
+
+return Object.values(members);
+
+}
+
+async function loadMembers(){
+
+const list=document.getElementById("memberList");
+
+list.innerHTML="⏳ Loading...";
+
+const members=await getMembersData();
+
+list.innerHTML="";
+
+if(!members.length){
+list.innerHTML="<p>अजून वर्गणीदार नाहीत.</p>";
+return;
+}
+
+members.forEach(m=>{
+
+const div=document.createElement("div");
+
+div.className="item";
+
+div.innerHTML=
+"👤 <b>"+m.name+"</b><br>"+
+"📱 "+m.mobile+"<br>"+
+"💰 एकूण वर्गणी: <b>"+formatAmount(m.total)+"</b>";
+
+list.appendChild(div);
+
+});
+
+}
+
+document.getElementById("memberSearch")
+.addEventListener("input",function(){
+
+const search=this.value.toLowerCase();
+
+document.querySelectorAll("#memberList .item")
+.forEach(item=>{
+
+item.style.display=
+item.innerText.toLowerCase().includes(search)
+?"block":"none";
+
+});
+
+});
+
+
+/* ================= EXPENSE ================= */
+
+document.getElementById("expenseBtn").onclick=()=>{
+
+showPage("expensePage");
+
+document.getElementById("expenseTitle").value="";
+document.getElementById("expenseAmount").value="";
+document.getElementById("expenseDate").value=today();
+document.getElementById("expenseNote").value="";
+
+};
+
+document.getElementById("saveExpenseBtn").onclick=async()=>{
+
+if(!isAdmin()){
+alert("❌ फक्त Admin खर्च नोंद करू शकतो.");
+return;
+}
+
+const title=document.getElementById("expenseTitle").value.trim();
+
+const amount=Number(document.getElementById("expenseAmount").value);
+
+const date=document.getElementById("expenseDate").value;
+
+const note=document.getElementById("expenseNote").value.trim();
+
+if(!title||amount<=0||!date){
+alert("⚠️ सर्व आवश्यक माहिती भरा.");
+return;
+}
+
+const expenseData={
+title,
+amount,
+date,
+note,
+createdBy:auth.currentUser.email,
+createdAt:new Date().toISOString()
+};
+
+try{
+
+await push(ref(db,"expenses"),expenseData);
+
+document.getElementById("expenseMessage").className=
+"message success";
+
+document.getElementById("expenseMessage").innerText=
+"✅ खर्च Save झाला!";
+
+await loadDashboard();
+
+}catch(e){
+
+alert("❌ "+e.message);
+
+}
+
+};
+
+
+/* ================= REPORT ================= */
+
+document.getElementById("reportBtn").onclick=async()=>{
+
+showPage("reportPage");
+
+document.getElementById("reportFrom").value="";
+document.getElementById("reportTo").value="";
+
+await loadReports();
+
+};
+
+document.getElementById("filterReportBtn").onclick=loadReports;
+
+document.getElementById("clearFilterBtn").onclick=async()=>{
+
+document.getElementById("reportFrom").value="";
+document.getElementById("reportTo").value="";
+
+await loadReports();
+
+};
+
+function dateMatch(date,from,to){
+
+if(from&&date<from) return false;
+
+if(to&&date>to) return false;
+
+return true;
+
+}
+
+async function loadReports(){
+
+const receiptSnap=await get(ref(db,"receipts"));
+
+const expenseSnap=await get(ref(db,"expenses"));
+
+const from=document.getElementById("reportFrom").value;
+
+const to=document.getElementById("reportTo").value;
+
+allReceipts=[];
+allExpenses=[];
+
+let income=0;
+let expense=0;
+let cash=0;
+let upi=0;
+let online=0;
+
+if(receiptSnap.exists()){
+
+receiptSnap.forEach(child=>{
+
+const d={
+...child.val(),
+id:child.key
+};
+
+if(
+d.status!=="cancelled"&&
+dateMatch(d.date,from,to)
+){
+
+allReceipts.push(d);
+
+income+=Number(d.amount||0);
+
+if(d.paymentMode==="Cash")
+cash+=Number(d.amount||0);
+
+if(d.paymentMode==="UPI")
+upi+=Number(d.amount||0);
+
+if(d.paymentMode==="Online")
+online+=Number(d.amount||0);
+
+}
+
+});
+
+}
+
+if(expenseSnap.exists()){
+
+expenseSnap.forEach(child=>{
+
+const d={
+...child.val(),
+id:child.key
+};
+
+if(dateMatch(d.date,from,to)){
+
+allExpenses.push(d);
+
+expense+=Number(d.amount||0);
+
+}
+
+});
+
+}
+
+allReceipts.sort(
+(a,b)=>Number(b.receiptNo)-Number(a.receiptNo)
+);
+
+allExpenses.sort(
+(a,b)=>String(b.date).localeCompare(String(a.date))
+);
+
+document.getElementById("reportIncome").innerText=formatAmount(income);
+document.getElementById("reportExpense").innerText=formatAmount(expense);
+document.getElementById("reportBalance").innerText=formatAmount(income-expense);
+document.getElementById("reportCash").innerText=formatAmount(cash);
+document.getElementById("reportUpi").innerText=formatAmount(upi);
+document.getElementById("reportOnline").innerText=formatAmount(online);
+
+renderReceiptReport();
+renderExpenseReport();
+
+}
+
+
+/* ================= REPORT RECEIPTS ================= */
+
+function renderReceiptReport(){
+
+const list=document.getElementById("reportList");
+
+list.innerHTML="";
+
+if(!allReceipts.length){
+
+list.innerHTML="<p>या कालावधीत पावत्या नाहीत.</p>";
+
+return;
+
+}
+
+allReceipts.forEach(d=>{
+
+const div=document.createElement("div");
+
+div.className="item";
+
+div.innerHTML=
+"🧾 <b>पावती क्रमांक: "+d.receiptNo+"</b><br>"+
+"👤 "+d.name+"<br>"+
+"📱 "+d.mobile+"<br>"+
+"💰 "+formatAmount(d.amount)+"<br>"+
+"💳 "+d.paymentMode+"<br>"+
+"📅 "+formatDate(d.date);
+
+list.appendChild(div);
+
+});
+
+}
+
+
+/* ================= REPORT EXPENSE ================= */
+
+function renderExpenseReport(){
+
+const list=document.getElementById("expenseReportList");
+
+list.innerHTML="";
+
+if(!allExpenses.length){
+
+list.innerHTML="<p>या कालावधीत खर्च नाही.</p>";
+
+return;
+
+}
+
+allExpenses.forEach(d=>{
+
+const div=document.createElement("div");
+
+div.className="item expense-item";
+
+div.innerHTML=
+"💸 <b>"+d.title+"</b><br>"+
+"💰 रक्कम: <b>"+formatAmount(d.amount)+"</b><br>"+
+"📅 दिनांक: "+formatDate(d.date)+"<br>"+
+"📝 टीप: "+(d.note||"-")+"<br><br>"+
+"<button class='blue' onclick='editExpense(\""+d.id+"\")'>✏️ Edit</button>"+
+"<button class='cancel' onclick='deleteExpense(\""+d.id+"\")'>🗑️ Delete</button>";
+
+list.appendChild(div);
+
+});
+
+}
+
+
+/* ================= EDIT EXPENSE ================= */
+
+window.editExpense=async function(id){
+
+if(!isAdmin()) return;
+
+const item=allExpenses.find(x=>x.id===id);
+
+if(!item) return;
+
+const title=prompt("खर्चाचे कारण:",item.title);
+
+if(title===null) return;
+
+const amount=prompt("खर्च रक्कम:",item.amount);
+
+if(amount===null) return;
+
+const date=prompt("दिनांक YYYY-MM-DD:",item.date);
+
+if(date===null) return;
+
+const note=prompt("टीप:",item.note||"");
+
+if(note===null) return;
+
+await update(ref(db,"expenses/"+id),{
+title:title.trim(),
+amount:Number(amount),
+date:date,
+note:note.trim(),
+updatedAt:new Date().toISOString()
+});
+
+await loadReports();
+await loadDashboard();
+
+alert("✅ खर्च Update झाला!");
+
+};
+
+
+/* ================= DELETE EXPENSE ================= */
+
+window.deleteExpense=async function(id){
+
+if(!isAdmin()) return;
+
+if(!confirm("हा खर्च Delete करायचा आहे का?")) return;
+
+await remove(ref(db,"expenses/"+id));
+
+await loadReports();
+await loadDashboard();
+
+alert("🗑️ खर्च Delete झाला!");
+
+};
+
+
+/* ================= PDF HELPERS ================= */
+
+function getPDF(){
+
+return window.jspdf.jsPDF;
+
+}
+
+function addPdfHeader(doc,title){
+
+doc.setFontSize(18);
+
+doc.text(
+appSettings.mandalName||"Hindavi Mandal",
+14,
+18
+);
+
+doc.setFontSize(14);
+
+doc.text(title,14,28);
+
+doc.setFontSize(10);
+
+doc.text(
+"Generated: "+new Date().toLocaleString(),
+14,
+36
+);
+
+}
+
+
+/* ================= RECEIPTS PDF ================= */
+
+document.getElementById("receiptsPdfBtn").onclick=()=>{
+
+const {jsPDF}=window.jspdf;
+
+const doc=new jsPDF();
+
+addPdfHeader(doc,"All Receipts Report");
+
+const rows=allReceipts.map(d=>[
+d.receiptNo,
+d.name,
+d.mobile,
+formatAmount(d.amount),
+d.paymentMode,
+formatDate(d.date)
+]);
+
+doc.autoTable({
+
+startY:42,
+
+head:[
+[
+"Receipt No",
+"Name",
+"Mobile",
+"Amount",
+"Payment",
+"Date"
+]
+],
+
+body:rows
+
+});
+
+doc.save("Hindavi-All-Receipts.pdf");
+
+};
+
+
+/* ================= EXPENSE PDF ================= */
+
+document.getElementById("expensesPdfBtn").onclick=()=>{
+
+const {jsPDF}=window.jspdf;
+
+const doc=new jsPDF();
+
+addPdfHeader(doc,"Expense Report");
+
+const total=allExpenses.reduce(
+(s,x)=>s+Number(x.amount||0),
+0
+);
+
+doc.setFontSize(12);
+
+doc.text(
+"Total Expense: "+formatAmount(total),
+14,
+44
+);
+
+const rows=allExpenses.map(d=>[
+d.title,
+formatAmount(d.amount),
+formatDate(d.date),
+d.note||"-"
+]);
+
+doc.autoTable({
+
+startY:50,
+
+head:[
+[
+"Expense",
+"Amount",
+"Date",
+"Note"
+]
+],
+
+body:rows
+
+});
+
+doc.save("Hindavi-Expense-Report.pdf");
+
+};
+
+
+/* ================= FULL FINANCIAL PDF ================= */
+
+document.getElementById("fullReportPdfBtn").onclick=()=>{
+
+const {jsPDF}=window.jspdf;
+
+const doc=new jsPDF();
+
+addPdfHeader(doc,"Full Financial Report");
+
+const income=allReceipts.reduce(
+(s,x)=>s+Number(x.amount||0),
+0
+);
+
+const expense=allExpenses.reduce(
+(s,x)=>s+Number(x.amount||0),
+0
+);
+
+doc.setFontSize(13);
+
+doc.text(
+"Total Income: "+formatAmount(income),
+14,
+46
+);
+
+doc.text(
+"Total Expense: "+formatAmount(expense),
+14,
+54
+);
+
+doc.text(
+"Balance: "+formatAmount(income-expense),
+14,
+62
+);
+
+doc.text(
+"Total Receipts: "+allReceipts.length,
+14,
+70
+);
+
+doc.text(
+"Total Expenses: "+allExpenses.length,
+14,
+78
+);
+
+doc.autoTable({
+
+startY:88,
+
+head:[
+[
+"Receipt No",
+"Name",
+"Amount",
+"Payment",
+"Date"
+]
+],
+
+body:allReceipts.map(d=>[
+d.receiptNo,
+d.name,
+formatAmount(d.amount),
+d.paymentMode,
+formatDate(d.date)
+])
+
+});
+
+let y=doc.lastAutoTable.finalY+12;
+
+if(y>250){
+
+doc.addPage();
+
+y=20;
+
+}
+
+doc.setFontSize(14);
+
+doc.text("Expense Details",14,y);
+
+doc.autoTable({
+
+startY:y+8,
+
+head:[
+[
+"Expense",
+"Amount",
+"Date",
+"Note"
+]
+],
+
+body:allExpenses.map(d=>[
+d.title,
+formatAmount(d.amount),
+formatDate(d.date),
+d.note||"-"
+])
+
+});
+
+doc.save("Hindavi-Full-Financial-Report.pdf");
+
+};
+
+
+/* ================= MEMBER PDF ================= */
+
+document.getElementById("memberPdfBtn").onclick=async()=>{
+
+const members=await getMembersData();
+
+const {jsPDF}=window.jspdf;
+
+const doc=new jsPDF();
+
+addPdfHeader(doc,"Members Report");
+
+doc.autoTable({
+
+startY:42,
+
+head:[
+[
+"Name",
+"Mobile",
+"Total Contribution"
+]
+],
+
+body:members.map(m=>[
+m.name,
+m.mobile,
+formatAmount(m.total)
+])
+
+});
+
+doc.save("Hindavi-Members-Report.pdf");
+
+};
+
+
+/* ================= SEARCH RECEIPT ================= */
+
+document.getElementById("searchReceiptBtn").onclick=async()=>{
+
+const number=prompt("🔍 पावती क्रमांक टाका:");
+
+if(!number) return;
+
+const snap=await get(ref(db,"receipts"));
+
+let found=null;
+
+if(snap.exists()){
+
+snap.forEach(child=>{
+
+const d=child.val();
+
+if(Number(d.receiptNo)===Number(number)){
+
+found={
+...d,
+id:child.key
+};
+
+}
+
+});
+
+}
+
+if(!found){
+alert("❌ पावती सापडली नाही.");
+return;
+}
+
+if(found.status==="cancelled"){
+alert("❌ ही पावती Cancel झाली आहे.");
+return;
+}
+
+if(confirm(
+"🧾 पावती क्रमांक: "+found.receiptNo+
+"\n👤 नाव: "+found.name+
+"\n💰 रक्कम: "+formatAmount(found.amount)+
+"\n\nWhatsApp वर पाठवायची का?"
+)){
+shareReceipt(found);
+}
+
+};
+
+
+/* ================= CANCEL RECEIPT ================= */
+
+document.getElementById("cancelReceiptBtn").onclick=async()=>{
+
+if(!isAdmin()) return;
+
+const number=prompt(
+"❌ Cancel करण्यासाठी पावती क्रमांक टाका:"
+);
+
+if(!number) return;
+
+const reason=prompt(
+"Cancel करण्याचे कारण टाका:"
+);
+
+if(!reason) return;
+
+const snap=await get(ref(db,"receipts"));
+
+let foundKey=null;
+
+snap.forEach(child=>{
+
+const d=child.val();
+
+if(Number(d.receiptNo)===Number(number)){
+foundKey=child.key;
+}
+
+});
+
+if(!foundKey){
+alert("❌ पावती सापडली नाही.");
+return;
+}
+
+if(!confirm(
+"पावती क्रमांक "+number+
+" Cancel करायची आहे का?"
+)) return;
+
+await update(
+ref(db,"receipts/"+foundKey),
+{
+status:"cancelled",
+cancelReason:reason,
+cancelledAt:new Date().toISOString(),
+cancelledBy:auth.currentUser.email
+}
+);
+
+alert("✅ पावती Cancel झाली!");
+
+await loadDashboard();
+
+};
+
+
+/* ================= SETTINGS ================= */
+
+document.getElementById("settingsBtn").onclick=()=>{
+
+showPage("settingsPage");
+
+document.getElementById("settingMandalName").value=
+appSettings.mandalName||"";
+
+document.getElementById("settingAddress").value=
+appSettings.address||"";
+
+document.getElementById("treasurerName").value=
+appSettings.treasurerName||"";
+
+document.getElementById("mandalLogo").value=
+appSettings.logo||"";
+
+};
+
+document.getElementById("saveSettingsBtn").onclick=async()=>{
+
+if(!isAdmin()){
+alert("❌ फक्त Admin Settings बदलू शकतो.");
+return;
+}
+
+const data={
+
+mandalName:
+document.getElementById("settingMandalName").value.trim(),
+
+address:
+document.getElementById("settingAddress").value.trim(),
+
+treasurerName:
+document.getElementById("treasurerName").value.trim(),
+
+logo:
+document.getElementById("mandalLogo").value.trim()
+
+};
+
+await set(ref(db,"settings"),data);
+
+appSettings={...appSettings,...data};
+
+updateReceiptPreview();
+
+document.getElementById("settingsMessage").className=
+"message success";
+
+document.getElementById("settingsMessage").innerText=
+"✅ Settings Save झाले!";
+
+};
+
+
+/* ================= BACK BUTTONS ================= */
+
+[
+"backReceiptBtn",
+"backMemberBtn",
+"backExpenseBtn",
+"backReportBtn",
+"backSettingsBtn"
+].forEach(id=>{
+
+document.getElementById(id).onclick=()=>{
+showDashboard(auth.currentUser);
+};
+
+});
+
+
+/* ================= LOGOUT ================= */
+
+document.getElementById("logoutBtn").onclick=async()=>{
+
+await signOut(auth);
+
+};
+
+</script>
+
+</body>
+</html>
