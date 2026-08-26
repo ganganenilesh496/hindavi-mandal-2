@@ -10766,7 +10766,6 @@ function pdfHeader(
 /* ================================
    PDF TABLE DRAWER
 ================================ */
-
 function drawTable(
   doc,
   headers,
@@ -10775,14 +10774,14 @@ function drawTable(
   widths
 ){
 
-  const pageWidth =
-    190;
+  const pageHeight =
+    297;
 
   let y =
     startY;
 
   const rowHeight =
-    8;
+    9;
 
 
   function drawHeader(){
@@ -10814,10 +10813,10 @@ function drawTable(
         doc.text(
           String(header),
           x + 1.5,
-          y + 5.5,
+          y + 6,
           {
             maxWidth:
-              widths[i]-3
+              widths[i] - 3
           }
         );
 
@@ -10848,8 +10847,8 @@ function drawTable(
     function(row){
 
       if(
-        y >
-        275
+        y + rowHeight >
+        pageHeight - 15
       ){
 
         doc.addPage();
@@ -10878,10 +10877,10 @@ function drawTable(
           doc.text(
             String(cell ?? "-"),
             x + 1.5,
-            y + 5.5,
+            y + 6,
             {
               maxWidth:
-                widths[i]-3
+                widths[i] - 3
             }
           );
 
@@ -10903,7 +10902,6 @@ function drawTable(
   return y;
 
 }
-
 
 /* ================================
    MEMBERS PDF
