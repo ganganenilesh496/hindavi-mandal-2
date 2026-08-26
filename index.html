@@ -10695,7 +10695,36 @@ function escapeHtml(value){
 /* ================================
    PDF HEADER
 ================================ */
+async function loadMarathiFont(doc){
 
+  const response = await fetch(
+    "./NotoSansDevanagari-Regular.ttf"
+  );
+
+  const buffer = await response.arrayBuffer();
+
+  const bytes = new Uint8Array(buffer);
+
+  let binary = "";
+
+  for(let i = 0; i < bytes.length; i++){
+    binary += String.fromCharCode(bytes[i]);
+  }
+
+  const base64 = btoa(binary);
+
+  doc.addFileToVFS(
+    "NotoSansDevanagari-Regular.ttf",
+    base64
+  );
+
+  doc.addFont(
+    "NotoSansDevanagari-Regular.ttf",
+    "NotoSansDevanagari",
+    "normal"
+  );
+
+}
 
 function pdfHeader(
   doc,
@@ -10703,10 +10732,11 @@ function pdfHeader(
 ){
 
   doc.setFont(
-    "helvetica",
-    "bold"
-  );
-
+  "NotoSansDevanagari",
+  "normal"
+);
+    
+ 
   doc.setFontSize(
     18
   );
