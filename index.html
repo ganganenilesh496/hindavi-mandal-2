@@ -11087,7 +11087,7 @@ async function downloadExpensePDF(){
     );
 
 
-  drawTable(
+drawTable(
     doc,
 
     [
@@ -11098,22 +11098,41 @@ async function downloadExpensePDF(){
       "टीप"
     ],
 
-    rows,
+    expenseRows,
 
     40,
 
     [
       12,
-      28,
-      65,
       30,
-      55
+      70,
+      32,
+      46
     ]
   );
 
 
+  doc.setFont(
+    "helvetica",
+    "bold"
+  );
+
+
+  doc.setFontSize(
+    12
+  );
+
+
+  doc.text(
+    "एकूण खर्च: " +
+    formatAmount(expense),
+    150,
+    275
+  );
+
+
   doc.save(
-    "Hindavi-Kharch-Report.pdf"
+    "Hindavi-Full-Report-2026.pdf"
   );
 
 }
