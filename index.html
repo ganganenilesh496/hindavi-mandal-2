@@ -11355,7 +11355,27 @@ async function downloadFullPDF(){
     );
 
 
-  drawTable(
+  
+
+/* ================================
+   PDF BUTTONS
+================================ */
+
+document
+.getElementById(
+  "membersPdfBtn"
+)
+.addEventListener(
+"click",
+async function(){
+
+  await loadReports();
+
+  await downloadMembersPDF();
+
+});
+
+drawTable(
     doc,
 
     [
@@ -11404,26 +11424,6 @@ async function downloadFullPDF(){
   );
 
 }
-
-
-/* ================================
-   PDF BUTTONS
-================================ */
-
-document
-.getElementById(
-  "membersPdfBtn"
-)
-.addEventListener(
-"click",
-async function(){
-
-  await loadReports();
-
-  await downloadMembersPDF();
-
-});
-
 
 document
 .getElementById(
