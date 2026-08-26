@@ -10693,58 +10693,129 @@ function escapeHtml(value){
 
 
 /* ================================
-   PDF HEADER
+   PDF HEADER + MARATHI FONT
 ================================ */
+
 async function loadMarathiFont(doc){
 
-  const response = await fetch(
-    "./NotoSansDevanagari-Regular.ttf"
-  );
+  try{
 
-  const buffer = await response.arrayBuffer();
+    const response =
+      await fetch(
+        "./NotoSansDevanagari-Regular.ttf"
+      );
 
-  const bytes = new Uint8Array(buffer);
+    if(!response.ok){
 
-  let binary = "";
+      throw new Error(
+        "Font file load झाली नाही"
+      );
 
-  for(let i = 0; i < bytes.length; i++){
-    binary += String.fromCharCode(bytes[i]);
+    }
+
+
+    const buffer =
+      await response.arrayBuffer();
+
+
+    const bytes =
+      new Uint8Array(buffer);
+
+
+    let binary =
+      "";
+
+
+    for(
+      let i = 0;
+      i < bytes.length;
+      i++
+    ){
+
+      binary +=
+        String.fromCharCode(
+          bytes[i]
+        );
+
+    }
+
+
+    const base64 =
+      btoa(binary);
+
+
+    doc.addFileToVFS(
+      "NotoSansDevanagari-Regular.ttf",
+      base64
+    );
+
+
+    doc.addFont(
+      "NotoSansDevanagari-Regular.ttf",
+      "NotoSansDevanagari",
+      "normal"
+    );
+
+
+    doc.setFont(
+      "NotoSansDevanagari",
+      "normal"
+    );
+
+
+    return true;
+
+  }
+  catch(error){
+
+    console.error(
+      "Marathi Font Error:",
+      error
+    );
+
+    alert(
+      "⚠️ मराठी Font लोड झाली नाही."
+    );
+
+    return false;
+
   }
 
-  const base64 = btoa(binary);
-
-  doc.addFileToVFS(
-    "NotoSansDevanagari-Regular.ttf",
-    base64
-  );
-
-  doc.addFont(
-    "NotoSansDevanagari-Regular.ttf",
-    "NotoSansDevanagari",
-    "normal"
-  );
-
 }
+
+
+/* ================================
+   PDF HEADER
+================================ */
 
 function pdfHeader(
   doc,
   title
 ){
 
+  const pageWidth =
+    doc.internal.pageSize.getWidth();
+
+
+  const centerX =
+    pageWidth / 2;
+
+
   doc.setFont(
-  "NotoSansDevanagari",
-  "normal"
-);
-    
- 
+    "NotoSansDevanagari",
+    "normal"
+  );
+
+
   doc.setFontSize(
     18
   );
 
+
   doc.text(
     appSettings.mandalName ||
     "हिंदवी कला व क्रीडा सांस्कृतिक मंडळ",
-    105,
+    centerX,
     15,
     {
       align:"center"
@@ -10756,9 +10827,10 @@ function pdfHeader(
     12
   );
 
+
   doc.text(
     title,
-    105,
+    centerX,
     23,
     {
       align:"center"
@@ -10770,13 +10842,14 @@ function pdfHeader(
     9
   );
 
+
   doc.text(
     "पत्ता: " +
     (
       appSettings.address ||
       "-"
     ),
-    105,
+    centerX,
     30,
     {
       align:"center"
@@ -10787,15 +10860,17 @@ function pdfHeader(
   doc.line(
     10,
     34,
-    200,
+    pageWidth - 10,
     34
   );
 
 }
 
+
 /* ================================
    PDF TABLE DRAWER
 ================================ */
+
 function drawTable(
   doc,
   headers,
@@ -10803,29 +10878,38 @@ function drawTable(
   startY,
   widths
 ){
-doc.setFont(
-  "NotoSansDevanagari",
-  "normal"
-);
-  const pageHeight =
-    297;
 
-  let y =
-    startY;
+  const pageHeight =
+    doc.internal.pageSize.getHeight();
+
+
+  const marginTop =
+    15;
+
+
+  const marginBottom =
+    15;
+
 
   const rowHeight =
     9;
 
 
+  let y =
+    startY;
+
+
   function drawHeader(){
 
-    let x = 10;
+    let x =
+      10;
 
 
-  doc.setFont(
-  "NotoSansDevanagari",
-  "normal"
-);b
+    doc.setFont(
+      "NotoSansDevanagari",
+      "normal"
+    );
+
 
     doc.setFontSize(
       7
@@ -10835,27 +10919,31 @@ doc.setFont(
     headers.forEach(
       function(header,i){
 
+        const width =
+          widths[i] || 20;
+
+
         doc.rect(
           x,
           y,
-          widths[i],
+          width,
           rowHeight
         );
 
 
         doc.text(
-          String(header),
+          String(header ?? "-"),
           x + 1.5,
           y + 6,
           {
             maxWidth:
-              widths[i] - 3
+              width - 3
           }
         );
 
 
         x +=
-          widths[i];
+          width;
 
       }
     );
@@ -10863,12 +10951,6 @@ doc.setFont(
 
     y +=
       rowHeight;
-
-
-    doc.setFont(
-      "NotoSansDevanagari",
-"normal"
-    );
 
   }
 
@@ -10881,45 +10963,65 @@ doc.setFont(
 
       if(
         y + rowHeight >
-        pageHeight - 15
+        pageHeight - marginBottom
       ){
 
         doc.addPage();
 
-        y = 15;
+        y =
+          marginTop;
+
 
         drawHeader();
 
       }
 
 
-      let x = 10;
+      let x =
+        10;
+
+
+      doc.setFont(
+        "NotoSansDevanagari",
+        "normal"
+      );
+
+
+      doc.setFontSize(
+        7
+      );
 
 
       row.forEach(
         function(cell,i){
 
+          const width =
+            widths[i] || 20;
+
+
           doc.rect(
             x,
             y,
-            widths[i],
+            width,
             rowHeight
           );
 
 
           doc.text(
-            String(cell ?? "-"),
+            String(
+              cell ?? "-"
+            ),
             x + 1.5,
             y + 6,
             {
               maxWidth:
-                widths[i] - 3
+                width - 3
             }
           );
 
 
           x +=
-            widths[i];
+            width;
 
         }
       );
@@ -10936,6 +11038,7 @@ doc.setFont(
 
 }
 
+
 /* ================================
    MEMBERS PDF
 ================================ */
@@ -10943,6 +11046,7 @@ doc.setFont(
 async function downloadMembersPDF(){
 
   if(
+    !reportMembersData ||
     reportMembersData.length === 0
   ){
 
@@ -10955,103 +11059,136 @@ async function downloadMembersPDF(){
   }
 
 
-  const {
-    jsPDF
-  } = window.jspdf;
+  try{
+
+    const {
+      jsPDF
+    } = window.jspdf;
 
 
-  const doc =
-    new jsPDF({
-      orientation:"landscape",
-      unit:"mm",
-      format:"a4"
-    });
-
-await loadMarathiFont(doc);
-  
-  pdfHeader(
-    doc,
-    "वर्गणीदार संपूर्ण रिपोर्ट"
-  );
+    const doc =
+      new jsPDF({
+        orientation:"landscape",
+        unit:"mm",
+        format:"a4"
+      });
 
 
-  const rows =
-    reportMembersData
-    .map(
-      function(data,index){
+    const fontLoaded =
+      await loadMarathiFont(
+        doc
+      );
 
-        return [
 
-          index + 1,
+    if(!fontLoaded){
 
-          data.receiptNo || "-",
+      alert(
+        "⚠️ मराठी Font लोड झाली नाही."
+      );
 
-          formatDate(
-            data.date
-          ),
+      return;
 
-          data.name || "-",
+    }
 
-          data.mobile || "-",
 
-          formatAmount(
-            data.targetContribution
-          ),
-
-          formatAmount(
-            data.amount
-          ),
-
-          formatAmount(
-            data.totalPaid
-          ),
-
-          formatAmount(
-            data.remainingDue
-          )
-
-        ];
-
-      }
+    pdfHeader(
+      doc,
+      "वर्गणीदार संपूर्ण रिपोर्ट"
     );
 
 
-  drawTable(
-    doc,
+    const rows =
+      reportMembersData.map(
+        function(data,index){
 
-    [
-      "क्र.",
-      "पावती",
-      "दिनांक",
-      "नाव",
-      "मोबाईल",
-      "ठरलेली",
-      "आज जमा",
-      "एकूण जमा",
-      "बाकी"
-    ],
+          return [
 
-    rows,
+            index + 1,
 
-    40,
+            data.receiptNo || "-",
 
-    [
-      10,
-      15,
-      23,
+            formatDate(
+              data.date
+            ),
+
+            data.name || "-",
+
+            data.mobile || "-",
+
+            formatAmount(
+              data.targetContribution || 0
+            ),
+
+            formatAmount(
+              data.amount || 0
+            ),
+
+            formatAmount(
+              data.totalPaid || 0
+            ),
+
+            formatAmount(
+              data.remainingDue || 0
+            )
+
+          ];
+
+        }
+      );
+
+
+    drawTable(
+      doc,
+
+      [
+        "क्र.",
+        "पावती",
+        "दिनांक",
+        "नाव",
+        "मोबाईल",
+        "ठरलेली",
+        "आज जमा",
+        "एकूण जमा",
+        "बाकी"
+      ],
+
+      rows,
+
       40,
-      28,
-      25,
-      22,
-      25,
-      22
-    ]
-  );
+
+      [
+        10,
+        15,
+        23,
+        40,
+        28,
+        25,
+        22,
+        25,
+        22
+      ]
+    );
 
 
-  doc.save(
-    "Hindavi-Vargani-Report.pdf"
-  );
+    doc.save(
+      "Hindavi-Vargani-Report.pdf"
+    );
+
+
+  }
+  catch(error){
+
+    console.error(
+      "Members PDF Error:",
+      error
+    );
+
+
+    alert(
+      "⚠️ वर्गणीदार रिपोर्ट तयार करताना समस्या आली."
+    );
+
+  }
 
 }
 
@@ -11063,6 +11200,7 @@ await loadMarathiFont(doc);
 async function downloadExpensePDF(){
 
   if(
+    !reportExpensesData ||
     reportExpensesData.length === 0
   ){
 
@@ -11075,100 +11213,151 @@ async function downloadExpensePDF(){
   }
 
 
-  const {
-    jsPDF
-  } = window.jspdf;
+  try{
+
+    const {
+      jsPDF
+    } = window.jspdf;
 
 
-  const doc =
-    new jsPDF({
-      orientation:"portrait",
-      unit:"mm",
-      format:"a4"
-    });
+    const doc =
+      new jsPDF({
+        orientation:"portrait",
+        unit:"mm",
+        format:"a4"
+      });
 
 
+    const fontLoaded =
+      await loadMarathiFont(
+        doc
+      );
 
-  pdfHeader(
-    doc,
-    "खर्चाचा संपूर्ण रिपोर्ट"
-  );
+
+    if(!fontLoaded){
+
+      alert(
+        "⚠️ मराठी Font लोड झाली नाही."
+      );
+
+      return;
+
+    }
 
 
-  const rows =
-    reportExpensesData
-    .map(
-      function(data,index){
-
-        return [
-
-          index + 1,
-
-          formatDate(
-            data.date
-          ),
-
-          data.title || "-",
-
-          formatAmount(
-            data.amount
-          ),
-
-          data.note || "-"
-
-        ];
-
-      }
+    pdfHeader(
+      doc,
+      "खर्चाचा संपूर्ण रिपोर्ट"
     );
 
 
-drawTable(
-    doc,
+    const rows =
+      reportExpensesData.map(
+        function(data,index){
 
-    [
-      "क्र.",
-      "दिनांक",
-      "खर्चाचे कारण",
-      "रक्कम",
-      "टीप"
-    ],
+          return [
 
-    expenseRows,
+            index + 1,
 
-    40,
+            formatDate(
+              data.date
+            ),
 
-    [
-      12,
-      30,
-      70,
-      32,
-      46
-    ]
-  );
+            data.title || "-",
 
+            formatAmount(
+              data.amount || 0
+            ),
 
-  doc.setFont(
-    "NotoSansDevanagari",
-"normal"
-  );
+            data.note || "-"
+
+          ];
+
+        }
+      );
 
 
-  doc.setFontSize(
-    12
-  );
+    drawTable(
+      doc,
+
+      [
+        "क्र.",
+        "दिनांक",
+        "खर्चाचे कारण",
+        "रक्कम",
+        "टीप"
+      ],
+
+      rows,
+
+      40,
+
+      [
+        12,
+        30,
+        70,
+        32,
+        46
+      ]
+    );
 
 
-  doc.text(
-    "एकूण खर्च: " +
-    formatAmount(expense),
-    150,
-    275
-  );
+    const totalExpense =
+      reportExpensesData.reduce(
+        function(total,data){
+
+          return (
+            total +
+            Number(
+              data.amount || 0
+            )
+          );
+
+        },
+        0
+      );
 
 
-  doc.save(
-    "Hindavi-Full-Report-2026.pdf"
-  );
+    doc.setFont(
+      "NotoSansDevanagari",
+      "normal"
+    );
+
+
+    doc.setFontSize(
+      12
+    );
+
+
+    doc.text(
+      "एकूण खर्च: " +
+      formatAmount(
+        totalExpense
+      ),
+      150,
+      275
+    );
+
+
+    doc.save(
+      "Hindavi-Kharch-Report.pdf"
+    );
+
+
+  }
+  catch(error){
+
+    console.error(
+      "Expense PDF Error:",
+      error
+    );
+
+
+    alert(
+      "⚠️ खर्च रिपोर्ट PDF तयार करताना समस्या आली."
+    );
+
+  }
 
 }
 
@@ -11179,606 +11368,594 @@ drawTable(
 
 async function downloadFullPDF(){
 
-  const {
-    jsPDF
-  } = window.jspdf;
+  if(
+    (!reportMembersData ||
+    reportMembersData.length === 0) &&
+    (!reportExpensesData ||
+    reportExpensesData.length === 0)
+  ){
 
-
-  const doc =
-    new jsPDF({
-      orientation:"landscape",
-      unit:"mm",
-      format:"a4"
-    })
-
-  /* PAGE 1 */
-
-  pdfHeader(
-    doc,
-    "पूर्ण आर्थिक रिपोर्ट - 2026"
-  );
-
-
-  const income =
-    reportMembersData
-    .reduce(
-      function(sum,data){
-
-        return sum +
-          Number(
-            data.amount || 0
-          );
-
-      },
-      0
+    alert(
+      "⚠️ रिपोर्टसाठी माहिती उपलब्ध नाही."
     );
 
-
-  const expense =
-    reportExpensesData
-    .reduce(
-      function(sum,data){
-
-        return sum +
-          Number(
-            data.amount || 0
-          );
-
-      },
-      0
-    );
-
-
-  const due =
-    reportMembersData
-    .reduce(
-      function(sum,data){
-
-        return sum +
-          Number(
-            data.remainingDue || 0
-          );
-
-      },
-      0
-    );
-
-
-  doc.setFont(
-    "NotoSansDevanagari",
-"normal"
-  );
-
-  doc.setFontSize(
-    14
-  );
-
-
-  doc.text(
-    "एकूण जमा: " +
-    formatAmount(income),
-    20,
-    48
-  );
-
-
-  doc.text(
-    "एकूण खर्च: " +
-    formatAmount(expense),
-    75,
-    48
-  );
-
-
-  doc.text(
-    "शिल्लक: " +
-    formatAmount(
-      income-expense
-    ),
-    130,
-    48
-  );
-
-
-  doc.text(
-    "एकूण बाकी: " +
-    formatAmount(due),
-    170,
-    48
-  );
-
-
-  doc.setFontSize(
-    11
-  );
-
-
-  doc.text(
-    "वर्गणीदार रिपोर्ट",
-    10,
-    62
-  );
-
-
-  const memberRows =
-    reportMembersData
-    .map(
-      function(data,index){
-
-        return [
-
-          index+1,
-
-          data.receiptNo || "-",
-
-          formatDate(
-            data.date
-          ),
-
-          data.name || "-",
-
-          formatAmount(
-            data.targetContribution
-          ),
-
-          formatAmount(
-            data.amount
-          ),
-
-          formatAmount(
-            data.totalPaid
-          ),
-
-          formatAmount(
-            data.remainingDue
-          )
-
-        ];
-
-      }
-    );
-
-
-  drawTable(
-    doc,
-
-    [
-      "क्र.",
-      "पावती",
-      "दिनांक",
-      "नाव",
-      "ठरलेली",
-      "आज जमा",
-      "एकूण जमा",
-      "बाकी"
-    ],
-
-    memberRows,
-
-    68,
-
-    [
-      10,
-      16,
-      25,
-      52,
-      27,
-      25,
-      27,
-      25
-    ]
-  );
-
-
-  /* EXPENSE PAGE */
-
-  doc.addPage();
-
-
-  pdfHeader(
-    doc,
-    "खर्चाचा संपूर्ण रिपोर्ट"
-  );
-
-
-  const expenseRows =
-    reportExpensesData
-    .map(
-      function(data,index){
-
-        return [
-
-          index+1,
-
-          formatDate(
-            data.date
-          ),
-
-          data.title || "-",
-
-          formatAmount(
-            data.amount
-          ),
-
-          data.note || "-"
-
-        ];
-
-      }
-    );
-
-
-  
-
-/* ================================
-   PDF BUTTONS
-================================ */
-
-document
-.getElementById(
-  "membersPdfBtn"
-)
-.addEventListener(
-"click",
-async function(){
-
-  await loadReports();
-
-  await downloadMembersPDF();
-
-});
-
-drawTable(
-    doc,
-
-    [
-      "क्र.",
-      "दिनांक",
-      "खर्चाचे कारण",
-      "रक्कम",
-      "टीप"
-    ],
-
-    expenseRows,
-
-    40,
-
-    [
-      12,
-      30,
-      70,
-      32,
-      46
-    ]
-  );
-
-
-  doc.setFont(
-    "NotoSansDevanagari",
-"normal"
-  );
-
-
-  doc.setFontSize(
-    12
-  );
-
-
-  doc.text(
-    "एकूण खर्च: " +
-    formatAmount(expense),
-    150,
-    275
-  );
-
-
-  doc.save(
-    "Hindavi-Full-Report-2026.pdf"
-  );
-
-}
-
-document
-.getElementById(
-  "expensePdfBtn"
-)
-.addEventListener(
-"click",
-async function(){
-
-  await loadReports();
-
-  await downloadExpensePDF();
-
-});
-
-
-document
-.getElementById(
-  "fullPdfBtn"
-)
-.addEventListener(
-"click",
-async function(){
-
-  await loadReports();
-
-  await downloadFullPDF();
-
-});
-
-
-/* ================================
-   CANCEL RECEIPT
-================================ */
-
-document
-.getElementById(
-  "cancelReceiptBtn"
-)
-.addEventListener(
-"click",
-async function(){
-
-  const number =
-    prompt(
-      "❌ Cancel करण्यासाठी पावती क्रमांक टाका:"
-    );
-
-
-  if(!number)
     return;
 
-
-  const reason =
-    prompt(
-      "Cancel करण्याचे कारण टाका:"
-    );
-
-
-  if(!reason)
-    return;
+  }
 
 
   try{
 
-    const snapshot =
-      await get(
-        ref(
-          db,
-          "receipts"
-        )
+    const {
+      jsPDF
+    } = window.jspdf;
+
+
+    const doc =
+      new jsPDF({
+        orientation:"landscape",
+        unit:"mm",
+        format:"a4"
+      });
+
+
+    const fontLoaded =
+      await loadMarathiFont(
+        doc
       );
 
 
-    let foundKey =
-      null;
+    if(!fontLoaded){
+
+      alert(
+        "⚠️ मराठी Font लोड झाली नाही."
+      );
+
+      return;
+
+    }
 
 
-    if(snapshot.exists()){
+    /* MEMBERS PAGE */
 
-      snapshot.forEach(
-        function(child){
+    pdfHeader(
+      doc,
+      "वर्गणीदार संपूर्ण रिपोर्ट"
+    );
 
-          const data =
-            child.val();
+
+    const memberRows =
+      (reportMembersData || [])
+      .map(
+        function(data,index){
+
+          return [
+
+            index + 1,
+
+            data.receiptNo || "-",
+
+            formatDate(
+              data.date
+            ),
+
+            data.name || "-",
+
+            formatAmount(
+              data.targetContribution || 0
+            ),
+
+            formatAmount(
+              data.amount || 0
+            ),
+
+            formatAmount(
+              data.totalPaid || 0
+            ),
+
+            formatAmount(
+              data.remainingDue || 0
+            )
+
+          ];
+
+        }
+      );
 
 
-          if(
-            Number(
-              data.receiptNo
-            ) ===
-            Number(number)
-          ){
+    if(memberRows.length > 0){
 
-            foundKey =
-              child.key;
+      drawTable(
+        doc,
+
+        [
+          "क्र.",
+          "पावती",
+          "दिनांक",
+          "नाव",
+          "ठरलेली",
+          "आज जमा",
+          "एकूण जमा",
+          "बाकी"
+        ],
+
+        memberRows,
+
+        40,
+
+        [
+          10,
+          16,
+          25,
+          52,
+          27,
+          25,
+          27,
+          25
+        ]
+      );
+
+    }
+
+
+    /* EXPENSE PAGE */
+
+    if(
+      reportExpensesData &&
+      reportExpensesData.length > 0
+    ){
+
+      doc.addPage();
+
+
+      pdfHeader(
+        doc,
+        "खर्चाचा संपूर्ण रिपोर्ट"
+      );
+
+
+      const expenseRows =
+        reportExpensesData.map(
+          function(data,index){
+
+            return [
+
+              index + 1,
+
+              formatDate(
+                data.date
+              ),
+
+              data.title || "-",
+
+              formatAmount(
+                data.amount || 0
+              ),
+
+              data.note || "-"
+
+            ];
 
           }
+        );
 
+
+      const expenseTableY =
+        drawTable(
+          doc,
+
+          [
+            "क्र.",
+            "दिनांक",
+            "खर्चाचे कारण",
+            "रक्कम",
+            "टीप"
+          ],
+
+          expenseRows,
+
+          40,
+
+          [
+            12,
+            30,
+            70,
+            32,
+            46
+          ]
+        );
+
+
+      const totalExpense =
+        reportExpensesData.reduce(
+          function(total,data){
+
+            return (
+              total +
+              Number(
+                data.amount || 0
+              )
+            );
+
+          },
+          0
+        );
+
+
+      doc.setFont(
+        "NotoSansDevanagari",
+        "normal"
+      );
+
+
+      doc.setFontSize(
+        12
+      );
+
+
+      doc.text(
+        "एकूण खर्च: " +
+        formatAmount(
+          totalExpense
+        ),
+        200,
+        expenseTableY + 10,
+        {
+          align:"right"
         }
       );
 
     }
 
 
-    if(!foundKey){
-
-      alert(
-        "❌ पावती सापडली नाही."
-      );
-
-      return;
-
-    }
-
-
-    const ok =
-      confirm(
-        "पावती क्रमांक " +
-        number +
-        " Cancel करायची आहे का?"
-      );
-
-
-    if(!ok)
-      return;
-
-
-    await update(
-      ref(
-        db,
-        "receipts/" +
-        foundKey
-      ),
-      {
-
-        status:
-          "cancelled",
-
-        cancelReason:
-          reason,
-
-        cancelledAt:
-          new Date()
-          .toISOString(),
-
-        cancelledBy:
-          auth.currentUser
-          .email
-
-      }
+    doc.save(
+      "Hindavi-Full-Report-2026.pdf"
     );
 
-
-    alert(
-      "✅ पावती Cancel झाली!"
-    );
-
-
-    await loadDashboard();
 
   }
   catch(error){
 
+    console.error(
+      "Full PDF Error:",
+      error
+    );
+
+
     alert(
-      "❌ Error: " +
-      error.message
+      "⚠️ पूर्ण आर्थिक रिपोर्ट तयार करताना समस्या आली."
     );
 
   }
 
-});
+}
+
+
+/* ================================
+   PDF BUTTONS
+================================ */
+
+const membersPdfBtn =
+  document.getElementById(
+    "membersPdfBtn"
+  );
+
+
+if(membersPdfBtn){
+
+  membersPdfBtn.addEventListener(
+    "click",
+    async function(){
+
+      await loadReports();
+
+      await downloadMembersPDF();
+
+    }
+  );
+
+}
+
+
+const expensePdfBtn =
+  document.getElementById(
+    "expensePdfBtn"
+  );
+
+
+if(expensePdfBtn){
+
+  expensePdfBtn.addEventListener(
+    "click",
+    async function(){
+
+      await loadReports();
+
+      await downloadExpensePDF();
+
+    }
+  );
+
+}
+
+
+const fullPdfBtn =
+  document.getElementById(
+    "fullPdfBtn"
+  );
+
+
+if(fullPdfBtn){
+
+  fullPdfBtn.addEventListener(
+    "click",
+    async function(){
+
+      await loadReports();
+
+      await downloadFullPDF();
+
+    }
+  );
+
+}
+
+
+/* ================================
+   CANCEL RECEIPT
+================================ */
+
+const cancelReceiptBtn =
+  document.getElementById(
+    "cancelReceiptBtn"
+  );
+
+
+if(cancelReceiptBtn){
+
+  cancelReceiptBtn.addEventListener(
+    "click",
+    async function(){
+
+      const number =
+        prompt(
+          "❌ Cancel करण्यासाठी पावती क्रमांक टाका:"
+        );
+
+
+      if(
+        !number ||
+        !String(number).trim()
+      ){
+
+        return;
+
+      }
+
+
+      const reason =
+        prompt(
+          "Cancel करण्याचे कारण टाका:"
+        );
+
+
+      if(
+        !reason ||
+        !String(reason).trim()
+      ){
+
+        return;
+
+      }
+
+
+      try{
+
+        const snapshot =
+          await get(
+            ref(
+              db,
+              "receipts"
+            )
+          );
+
+
+        let foundKey =
+          null;
+
+
+        if(snapshot.exists()){
+
+          snapshot.forEach(
+            function(child){
+
+              const data =
+                child.val();
+
+
+              if(
+                Number(data.receiptNo) ===
+                Number(number)
+              ){
+
+                foundKey =
+                  child.key;
+
+              }
+
+            }
+          );
+
+        }
+
+
+        if(!foundKey){
+
+          alert(
+            "❌ पावती सापडली नाही."
+          );
+
+          return;
+
+        }
+
+
+        const ok =
+          confirm(
+            "पावती क्रमांक " +
+            number +
+            " Cancel करायची आहे का?"
+          );
+
+
+        if(!ok){
+
+          return;
+
+        }
+
+
+        await update(
+          ref(
+            db,
+            "receipts/" +
+            foundKey
+          ),
+          {
+
+            status:
+              "cancelled",
+
+            cancelReason:
+              String(reason).trim(),
+
+            cancelledAt:
+              new Date()
+              .toISOString(),
+
+            cancelledBy:
+              auth.currentUser?.email ||
+              "Unknown"
+
+          }
+        );
+
+
+        alert(
+          "✅ पावती Cancel झाली!"
+        );
+
+
+        await loadDashboard();
+
+
+      }
+      catch(error){
+
+        console.error(
+          "Cancel Receipt Error:",
+          error
+        );
+
+
+        alert(
+          "❌ पावती Cancel करताना Error आला: " +
+          error.message
+        );
+
+      }
+
+    }
+  );
+
+}
 
 
 /* ================================
    BACK BUTTONS
 ================================ */
 
-document
-.getElementById(
-  "backReceiptBtn"
-)
-.addEventListener(
-"click",
-function(){
-
-  showDashboard(
-    auth.currentUser
-  );
-
-});
-
-
-document
-.getElementById(
-  "backMemberBtn"
-)
-.addEventListener(
-"click",
-function(){
-
-  showDashboard(
-    auth.currentUser
-  );
-
-});
-
-
-document
-.getElementById(
-  "backDueBtn"
-)
-.addEventListener(
-"click",
-function(){
-
-  showDashboard(
-    auth.currentUser
-  );
-
-});
-
-
-document
-.getElementById(
-  "backExpenseBtn"
-)
-.addEventListener(
-"click",
-function(){
-
-  showDashboard(
-    auth.currentUser
-  );
-
-});
-
-
-document
-.getElementById(
-  "backReportBtn"
-)
-.addEventListener(
-"click",
-function(){
-
-  showDashboard(
-    auth.currentUser
-  );
-
-});
-
-
-document
-.getElementById(
+const backButtons = [
+  "backReceiptBtn",
+  "backMemberBtn",
+  "backDueBtn",
+  "backExpenseBtn",
+  "backReportBtn",
   "backSettingsBtn"
-)
-.addEventListener(
-"click",
-function(){
+];
 
-  showDashboard(
-    auth.currentUser
-  );
 
-});
+backButtons.forEach(
+  function(buttonId){
+
+    const button =
+      document.getElementById(
+        buttonId
+      );
+
+
+    if(button){
+
+      button.addEventListener(
+        "click",
+        function(){
+
+          showDashboard(
+            auth.currentUser
+          );
+
+        }
+      );
+
+    }
+
+  }
+);
 
 
 /* ================================
    LOGOUT
 ================================ */
 
-document
-.getElementById(
-  "logoutBtn"
-)
-.addEventListener(
-"click",
-async function(){
-
-  await signOut(
-    auth
+const logoutBtn =
+  document.getElementById(
+    "logoutBtn"
   );
 
-});
+
+if(logoutBtn){
+
+  logoutBtn.addEventListener(
+    "click",
+    async function(){
+
+      try{
+
+        await signOut(
+          auth
+        );
+
+      }
+      catch(error){
+
+        console.error(
+          "Logout Error:",
+          error
+        );
+
+        alert(
+          "❌ Logout करताना समस्या आली."
+        );
+
+      }
+
+    }
+  );
+
+}
 
 
 </script>
 
 </body>
 </html>
-"click",
-async function(){
-
-  await signOut(
-    auth
-  );
-
-});
-
-
-</script>
-
-</body>
-  </html>
