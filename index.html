@@ -10822,10 +10822,10 @@ doc.setFont(
     let x = 10;
 
 
-    doc.setFont(
-      "helvetica",
-      "bold"
-    );
+  doc.setFont(
+  "NotoSansDevanagari",
+  "normal"
+);b
 
     doc.setFontSize(
       7
@@ -10866,8 +10866,8 @@ doc.setFont(
 
 
     doc.setFont(
-      "helvetica",
-      "normal"
+      "NotoSansDevanagari",
+"normal"
     );
 
   }
@@ -10967,7 +10967,8 @@ async function downloadMembersPDF(){
       format:"a4"
     });
 
-
+await loadMarathiFont(doc);
+  
   pdfHeader(
     doc,
     "वर्गणीदार संपूर्ण रिपोर्ट"
@@ -11086,6 +11087,7 @@ async function downloadExpensePDF(){
       format:"a4"
     });
 
+  await loadMarathiFont(doc);
 
   pdfHeader(
     doc,
@@ -11146,8 +11148,8 @@ drawTable(
 
 
   doc.setFont(
-    "helvetica",
-    "bold"
+    "NotoSansDevanagari",
+"normal"
   );
 
 
@@ -11244,8 +11246,8 @@ await loadMarathiFont(doc);
 
 
   doc.setFont(
-    "helvetica",
-    "bold"
+    "NotoSansDevanagari",
+"normal"
   );
 
   doc.setFontSize(
@@ -11453,8 +11455,8 @@ drawTable(
 
 
   doc.setFont(
-    "helvetica",
-    "bold"
+    "NotoSansDevanagari",
+"normal"
   );
 
 
