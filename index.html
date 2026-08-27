@@ -9936,11 +9936,13 @@ async function loadDueMembers(){
           ) +
           "</b>" +
 
-          "<br>⏳ बाकी: <b class='due-amount'>" +
-          formatAmount(
-            member.remaining
-          ) +
-          "</b>";
+          <tr>
+  <td>⏳ बाकी वर्गणी</td>
+  <td class="value due-amount"
+      id="previewDue">
+    ₹ 0
+  </td>
+</tr>
 
 
         list.appendChild(
