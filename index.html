@@ -1844,137 +1844,184 @@ function updateReceiptPreview(){
 
 }
 
-
-/* ================================
-   LOGIN
+  /* ================================
+   LOGIN + AUTH
 ================================ */
 
-document
-.getElementById("loginBtn")
-.addEventListener(
-"click",
-async function(){
-alert("LOGIN BUTTON WORKING");
-  
-  const email =
-    document
-    .getElementById("email")
-    .value
-    .trim();
+window.addEventListener(
+  "DOMContentLoaded",
+  function(){
 
-  const password =
-    document
-    .getElementById("password")
-    .value;
-
-  const message =
-    document
-    .getElementById(
-      "loginMessage"
+    console.log(
+      "APP SCRIPT STARTED"
     );
 
 
-  if(!email || !password){
-
-    message.className =
-      "message error";
-
-    message.innerText =
-      "⚠️ Email आणि Password टाका.";
-
-    return;
-
-  }
-
-
-  try{
-
-    message.className =
-      "message";
-
-    message.innerText =
-      "⏳ Login होत आहे...";
-
-
-    await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    
-alert("LOGIN SUCCESS: " + auth.currentUser.email);
-
-  }
-  catch(error){
-
-    console.error(error);
-
-    message.className =
-      "message error";
-
-
-    if(
-      error.code ===
-      "auth/invalid-credential"
-    ){
-
-      message.innerText =
-        "❌ Email किंवा Password चुकीचा आहे.";
-
-    }
-    else if(
-      error.code ===
-      "auth/user-not-found"
-    ){
-
-      message.innerText =
-        "❌ हा Email Firebase मध्ये नाही.";
-
-    }
-    else if(
-      error.code ===
-      "auth/wrong-password"
-    ){
-
-      message.innerText =
-        "❌ Password चुकीचा आहे.";
-
-    }
-    else{
-
-      message.innerText =
-        "❌ Login Error: " +
-        error.message;
-
-    }
-
-  }
-
-});
-
-
-/* ================================
-   AUTH
-================================ */
-
-onAuthStateChanged(
-  auth,
-  async function(user){
-
-    if(user){
-
-      await loadSettings();
-
-      await showDashboard(user);
-
-    }
-    else{
-
-      showPage(
-        "loginPage"
+    const loginBtn =
+      document.getElementById(
+        "loginBtn"
       );
 
+
+    if(!loginBtn){
+
+      alert(
+        "ERROR: loginBtn सापडला नाही!"
+      );
+
+      return;
+
     }
+
+
+    loginBtn.addEventListener(
+      "click",
+      async function(){
+
+        alert(
+          "LOGIN BUTTON WORKING"
+        );
+
+
+        const email =
+          document
+          .getElementById("email")
+          .value
+          .trim();
+
+
+        const password =
+          document
+          .getElementById("password")
+          .value;
+
+
+        const message =
+          document
+          .getElementById(
+            "loginMessage"
+          );
+
+
+        if(!email || !password){
+
+          message.className =
+            "message error";
+
+          message.innerText =
+            "⚠️ Email आणि Password टाका.";
+
+          return;
+
+        }
+
+
+        try{
+
+          message.className =
+            "message";
+
+          message.innerText =
+            "⏳ Login होत आहे...";
+
+
+          const userCredential =
+            await signInWithEmailAndPassword(
+              auth,
+              email,
+              password
+            );
+
+
+          alert(
+            "LOGIN SUCCESS: " +
+            userCredential.user.email
+          );
+
+        }
+        catch(error){
+
+          console.error(
+            "LOGIN ERROR:",
+            error
+          );
+
+
+          alert(
+            "LOGIN ERROR:\n\n" +
+            error.code +
+            "\n\n" +
+            error.message
+          );
+
+
+          message.className =
+            "message error";
+
+          message.innerText =
+            "❌ " +
+            error.code;
+
+        }
+
+      }
+    );
+
+
+    onAuthStateChanged(
+      auth,
+      async function(user){
+
+        console.log(
+          "AUTH STATE:",
+          user
+        );
+
+
+        if(user){
+
+          try{
+
+            await loadSettings();
+
+          }
+          catch(error){
+
+            console.error(
+              "Settings Error:",
+              error
+            );
+
+          }
+
+
+          try{
+
+            await showDashboard(
+              user
+            );
+
+          }
+          catch(error){
+
+            console.error(
+              "Dashboard Error:",
+              error
+            );
+
+          }
+
+        }
+        else{
+
+          showPage(
+            "loginPage"
+          );
+
+        }
+
+      }
+    );
 
   }
 );
