@@ -1648,68 +1648,54 @@ function formatDate(date){
 }
 
 
+
 /* ================================
-   SETTINGS LOAD
+SETTINGS LOAD
 ================================ */
 
 async function loadSettings(){
 
-  try{
+try{
 
-    const snapshot =
-      await get(ref(db,"settings"));
+const snapshot =
+  await get(
+    ref(db,"settings")
+  );
 
-    if(snapshot.exists()){
 
-      appSettings = {
+if(snapshot.exists()){
 
-        ...appSettings,
+  appSettings = {
 
-        ...snapshot.val()
+    ...appSettings,
 
-      };
+    ...snapshot.val()
 
-    }
-
-    updateReceiptPreview();
-
-  }
-  catch(error){
-
-    console.log(
-      "Settings Error:",
-      error
-    );
-
-  }
+  };
 
 }
 
 
-function updateReceiptHeader(){
+if(
+  typeof updateReceiptPreview ===
+  "function"
+){
 
-  document
-  .getElementById("previewMandalName")
-  .innerText =
-    appSettings.mandalName ||
-    "हिंदवी कला व क्रीडा सांस्कृतिक मंडळ";
-
-
-  document
-  .getElementById("previewAddress")
-  .innerText =
-    appSettings.address ||
-    "भवानी चौक, संगमनेर पोलीस स्टेशन जवळ";
-
-
-  document
-  .getElementById("previewTreasurer")
-  .innerText =
-    appSettings.treasurerName ||
-    "__________________";
+  updateReceiptPreview();
 
 }
 
+}
+catch(error){
+
+console.error(
+  "Settings Error:",
+  error
+);
+
+}
+
+}
 
 /* ================================
    RECEIPT PREVIEW
