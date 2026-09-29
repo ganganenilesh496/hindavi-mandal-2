@@ -508,10 +508,21 @@ $("loginBtn").onclick=async()=>{
 $("logoutBtn").onclick=()=>signOut(auth);
 onAuthStateChanged(auth,async user=>{
   if(!user){showPage("loginPage");return}
-  await loadSettings();$("userEmail").innerText=user.email;
-  const admin=user.email.toLowerCase()===ADMIN_EMAIL.toLowerCase();$("userRole").innerText=admin?"ADMIN 👑":"WORKER 👤";
+
+  // Login successful: open Dashboard first.
+  $("userEmail").innerText=user.email;
+  const admin=user.email.toLowerCase()===ADMIN_EMAIL.toLowerCase();
+  $("userRole").innerText=admin?"ADMIN 👑":"WORKER 👤";
   ["expenseBtn","reportBtn","cancelReceiptBtn","settingsBtn"].forEach(id=>$(id).style.display=admin?"block":"none");
-  await loadDashboard();showPage("dashboardPage");
+  showPage("dashboardPage");
+
+  // Database errors should not prevent the Dashboard from opening.
+  try{
+    await loadSettings();
+    await loadDashboard();
+  }catch(e){
+    console.error("Firebase Database Error:",e);
+  }
 });
 
 $("receiptBtn").onclick=async()=>{
