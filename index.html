@@ -526,7 +526,27 @@ onAuthStateChanged(auth,async user=>{
 });
 
 $("receiptBtn").onclick=async()=>{
-  $("memberName").value="";$("mobile").value="";$("targetContribution").value="";$("amount").value="";$("paymentMode").value="";$("transactionId").value="";$("receiptType").value="वर्गणी";$("note").value="";$("receiptDate").value=today();$("receiptNumber").innerText=await nextReceiptNo();lastSavedReceipt=null;updateReceiptPreview();showPage("receiptPage");
+  $("memberName").value="";
+  $("mobile").value="";
+  $("targetContribution").value="";
+  $("amount").value="";
+  $("paymentMode").value="";
+  $("transactionId").value="";
+  $("receiptType").value="वर्गणी";
+  $("note").value="";
+  $("receiptDate").value=today();
+  lastSavedReceipt=null;
+  $("receiptNumber").innerText="1";
+  updateReceiptPreview();
+  showPage("receiptPage");
+  try{
+    $("receiptNumber").innerText=await nextReceiptNo();
+    updateReceiptPreview();
+  }catch(e){
+    console.error("Receipt counter error:",e);
+    $("receiptNumber").innerText="1";
+    updateReceiptPreview();
+  }
 };
 $("backReceiptBtn").onclick=()=>showPage("dashboardPage");
 ["memberName","mobile","targetContribution","amount","paymentMode","transactionId","receiptType","note","receiptDate"].forEach(id=>{
