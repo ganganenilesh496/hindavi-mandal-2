@@ -431,6 +431,7 @@ import { getDatabase, ref, get, set, push, update, runTransaction } from "https:
 const firebaseConfig = {
   apiKey: "AIzaSyBK4vBPNt7kJ1z5RE3H7fRlohK-PhKqRTA",
   authDomain: "hindavi-navratra-receipt-book.firebaseapp.com",
+  databaseURL: "https://hindavi-navratra-receipt-book-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "hindavi-navratra-receipt-book",
   storageBucket: "hindavi-navratra-receipt-book.firebasestorage.app",
   messagingSenderId: "47824913118",
@@ -508,45 +509,14 @@ $("loginBtn").onclick=async()=>{
 $("logoutBtn").onclick=()=>signOut(auth);
 onAuthStateChanged(auth,async user=>{
   if(!user){showPage("loginPage");return}
-
-  // Login successful: open Dashboard first.
-  $("userEmail").innerText=user.email;
-  const admin=user.email.toLowerCase()===ADMIN_EMAIL.toLowerCase();
-  $("userRole").innerText=admin?"ADMIN 👑":"WORKER 👤";
+  await loadSettings();$("userEmail").innerText=user.email;
+  const admin=user.email.toLowerCase()===ADMIN_EMAIL.toLowerCase();$("userRole").innerText=admin?"ADMIN 👑":"WORKER 👤";
   ["expenseBtn","reportBtn","cancelReceiptBtn","settingsBtn"].forEach(id=>$(id).style.display=admin?"block":"none");
-  showPage("dashboardPage");
-
-  // Database errors should not prevent the Dashboard from opening.
-  try{
-    await loadSettings();
-    await loadDashboard();
-  }catch(e){
-    console.error("Firebase Database Error:",e);
-  }
+  await loadDashboard();showPage("dashboardPage");
 });
 
 $("receiptBtn").onclick=async()=>{
-  $("memberName").value="";
-  $("mobile").value="";
-  $("targetContribution").value="";
-  $("amount").value="";
-  $("paymentMode").value="";
-  $("transactionId").value="";
-  $("receiptType").value="वर्गणी";
-  $("note").value="";
-  $("receiptDate").value=today();
-  lastSavedReceipt=null;
-  $("receiptNumber").innerText="1";
-  updateReceiptPreview();
-  showPage("receiptPage");
-  try{
-    $("receiptNumber").innerText=await nextReceiptNo();
-    updateReceiptPreview();
-  }catch(e){
-    console.error("Receipt counter error:",e);
-    $("receiptNumber").innerText="1";
-    updateReceiptPreview();
-  }
+  $("memberName").value="";$("mobile").value="";$("targetContribution").value="";$("amount").value="";$("paymentMode").value="";$("transactionId").value="";$("receiptType").value="वर्गणी";$("note").value="";$("receiptDate").value=today();$("receiptNumber").innerText=await nextReceiptNo();lastSavedReceipt=null;updateReceiptPreview();showPage("receiptPage");
 };
 $("backReceiptBtn").onclick=()=>showPage("dashboardPage");
 ["memberName","mobile","targetContribution","amount","paymentMode","transactionId","receiptType","note","receiptDate"].forEach(id=>{
