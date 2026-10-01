@@ -481,7 +481,7 @@ async function loadDashboard(){
     const d=c.val()||{};
     if(d.status==="cancelled"){cancelled++;return}
     count++;income+=Number(d.amount||0);
-    const k=d.mobile||d.name;
+    const k=(d.mobile||"")+"|"+(d.name||"");
     if(!members[k])members[k]={target:0,paid:0};
     members[k].paid+=Number(d.amount||0);
     members[k].target=Math.max(members[k].target,Number(d.targetContribution||0));
@@ -538,7 +538,7 @@ $("saveReceiptBtn").onclick=async()=>{
     const no=Number(counterResult.snapshot.val()||1);
     let previous=0;
     const all=await get(ref(db,"receipts"));
-    if(all.exists())all.forEach(c=>{const d=c.val()||{};if(d.mobile===mobile&&d.status!=="cancelled")previous+=Number(d.amount||0)});
+    if(all.exists())all.forEach(c=>{const d=c.val()||{};if((d.mobile===mobile&&d.name===name)&&d.status!=="cancelled")previous+=Number(d.amount||0)});
     const totalPaid=previous+amount,remaining=Math.max(0,target-totalPaid);
     const data={receiptNo:no,name,mobile,targetContribution:target,amount,paymentMode:mode,transactionId:$("transactionId").value.trim(),receiptType:$("receiptType").value,note:$("note").value.trim(),date,totalPaid,remainingDue:remaining,status:"active",createdAt:new Date().toISOString(),createdBy:auth.currentUser.email};
     await push(ref(db,"receipts"),data);
@@ -575,14 +575,21 @@ document.querySelectorAll("[data-back]").forEach(b=>b.onclick=()=>showPage("dash
 async function loadMembers(){
  const list=$("memberList");list.innerHTML="Loading...";
  const s=await get(ref(db,"receipts"));const m={};
- if(s.exists())s.forEach(c=>{const d=c.val()||{};if(d.status==="cancelled")return;const k=d.mobile||d.name;if(!m[k])m[k]={name:d.name,mobile:d.mobile,target:0,paid:0};m[k].target=Math.max(m[k].target,Number(d.targetContribution||0));m[k].paid+=Number(d.amount||0)});
- list.innerHTML=Object.values(m).map(x=>`<div class="item"><b>${esc(x.name)}</b><br>📱 ${esc(x.mobile)}<br>🎯 ठरलेली: ${money(x.target)} | 💰 जमा: ${money(x.paid)} | ⏳ बाकी: ${money(Math.max(0,x.target-x.paid))}</div>`).join("")||"माहिती उपलब्ध नाही.";
+ if(s.exists())s.forEach(c=>{
+   const d=c.val()||{}; if(d.status==="cancelled")return;
+   const k=(d.mobile||"")+"|"+(d.name||"");
+   if(!m[k])m[k]={name:d.name,mobile:d.mobile,target:0,paid:0,receiptNos:[]};
+   m[k].target=Math.max(m[k].target,Number(d.targetContribution||0));
+   m[k].paid+=Number(d.amount||0);
+   if(d.receiptNo!==undefined && d.receiptNo!==null)m[k].receiptNos.push(d.receiptNo);
+ });
+ list.innerHTML=Object.values(m).map(x=>`<div class="item"><b>${esc(x.name)}</b><br>📱 ${esc(x.mobile)}<br>🧾 पावती क्रमांक: <b>${x.receiptNos.join(", ")||"-"}</b><br>🎯 ठरलेली: ${money(x.target)} | 💰 जमा: ${money(x.paid)} | ⏳ बाकी: ${money(Math.max(0,x.target-x.paid))}</div>`).join("")||"माहिती उपलब्ध नाही.";
 }
 $("memberSearch").oninput=()=>{const q=$("memberSearch").value.toLowerCase();document.querySelectorAll("#memberList .item").forEach(x=>x.style.display=x.innerText.toLowerCase().includes(q)?"block":"none")};
 async function loadDue(){
  const list=$("dueList");list.innerHTML="Loading...";
  const s=await get(ref(db,"receipts"));const m={};
- if(s.exists())s.forEach(c=>{const d=c.val()||{};if(d.status==="cancelled")return;const k=d.mobile||d.name;if(!m[k])m[k]={name:d.name,mobile:d.mobile,target:0,paid:0};m[k].target=Math.max(m[k].target,Number(d.targetContribution||0));m[k].paid+=Number(d.amount||0)});
+ if(s.exists())s.forEach(c=>{const d=c.val()||{};if(d.status==="cancelled")return;const k=(d.mobile||"")+"|"+(d.name||"");if(!m[k])m[k]={name:d.name,mobile:d.mobile,target:0,paid:0};m[k].target=Math.max(m[k].target,Number(d.targetContribution||0));m[k].paid+=Number(d.amount||0)});
  const arr=Object.values(m).filter(x=>x.target-x.paid>0);
  list.innerHTML=arr.map(x=>`<div class="item"><b>${esc(x.name)}</b><br>📱 ${esc(x.mobile)}<br>⏳ बाकी: <b>${money(x.target-x.paid)}</b></div>`).join("")||"🎉 कोणाचीही बाकी नाही.";
 }
@@ -613,9 +620,8 @@ $("cancelReceiptBtn").onclick=async()=>{
 
 async function loadReports(){
  const [rs,es]=await Promise.all([get(ref(db,"receipts")),get(ref(db,"expenses"))]);reportMembersData=[];reportExpensesData=[];const members={};let income=0,expense=0;
- if(rs.exists())rs.forEach(c=>{const d={...(c.val()||{}),id:c.key};if(d.status==="cancelled")return;reportMembersData.push(d);income+=Number(d.amount||0);const k=d.mobile||d.name;if(!members[k])members[k]={target:0,paid:0};members[k].target=Math.max(members[k].target,Number(d.targetContribution||0));members[k].paid+=Number(d.amount||0)});
- Object.values(members).forEach(m=>{});
- reportMembersData.forEach(d=>{const m=members[d.mobile||d.name];d.totalPaid=m.paid;d.remainingDue=Math.max(0,m.target-m.paid)});
+ if(rs.exists())rs.forEach(c=>{const d={...(c.val()||{}),id:c.key};if(d.status==="cancelled")return;reportMembersData.push(d);income+=Number(d.amount||0);const k=(d.mobile||"")+"|"+(d.name||"");if(!members[k])members[k]={target:0,paid:0};members[k].target=Math.max(members[k].target,Number(d.targetContribution||0));members[k].paid+=Number(d.amount||0)});
+ reportMembersData.forEach(d=>{const m=members[(d.mobile||"")+"|"+(d.name||"")];d.totalPaid=m.paid;d.remainingDue=Math.max(0,m.target-m.paid);d.todayPaid=Number(d.amount||0)});
  if(es.exists())es.forEach(c=>{const d={...(c.val()||{}),id:c.key};reportExpensesData.push(d);expense+=Number(d.amount||0)});
  const due=Object.values(members).reduce((s,m)=>s+Math.max(0,m.target-m.paid),0);
  $("reportIncome").innerText=money(income);$("reportExpense").innerText=money(expense);$("reportBalance").innerText=money(income-expense);$("reportDue").innerText=money(due);
