@@ -413,7 +413,7 @@ th{background:#f7ead2}
     <h3>वर्गणीदार रिपोर्ट</h3>
     <div class="table-wrap"><table><thead><tr><th>क्र.</th><th>पावती</th><th>दिनांक</th><th>नाव</th><th>मोबाईल</th><th>ठरलेली</th><th>आज जमा</th><th>एकूण जमा</th><th>बाकी</th></tr></thead><tbody id="memberReportBody"></tbody></table></div>
     <h3>खर्च रिपोर्ट</h3>
-    <div class="table-wrap"><table><thead><tr><th>क्र.</th><th>दिनांक</th><th>खर्चाचे कारण</th><th>रक्कम</th><th>टीप</th></tr></thead><tbody id="expenseReportBody"></tbody></table></div>
+    <div class="table-wrap"><table><thead><tr><th>क्र.</th><th>दिनांक</th><th>खर्चाचे कारण</th><th>रक्कम</th><th>टीप</th><th>Action</th></tr></thead><tbody id="expenseReportBody"></tbody></table></div>
     <button class="back" data-back>⬅️ Dashboard</button>
   </div>
 </div>
@@ -626,8 +626,25 @@ async function loadReports(){
  const due=Object.values(members).reduce((s,m)=>s+Math.max(0,m.target-m.paid),0);
  $("reportIncome").innerText=money(income);$("reportExpense").innerText=money(expense);$("reportBalance").innerText=money(income-expense);$("reportDue").innerText=money(due);
  $("memberReportBody").innerHTML=reportMembersData.map((d,i)=>`<tr><td>${i+1}</td><td>${d.receiptNo||"-"}</td><td>${formatDate(d.date)}</td><td>${esc(d.name)}</td><td>${esc(d.mobile)}</td><td>${money(d.targetContribution)}</td><td>${money(d.amount)}</td><td>${money(d.totalPaid)}</td><td>${money(d.remainingDue)}</td></tr>`).join("");
- $("expenseReportBody").innerHTML=reportExpensesData.map((d,i)=>`<tr><td>${i+1}</td><td>${formatDate(d.date)}</td><td>${esc(d.title)}</td><td>${money(d.amount)}</td><td>${esc(d.note)}</td></tr>`).join("");
+ $("expenseReportBody").innerHTML=reportExpensesData.map((d,i)=>`<tr><td>${i+1}</td><td>${formatDate(d.date)}</td><td>${esc(d.title)}</td><td>${money(d.amount)}</td><td>${esc(d.note)}</td><td><button type="button" class="gray" style="margin:0;padding:7px 10px;width:auto" onclick="editExpense('${d.id}')">✏️ Edit</button></td></tr>`).join("");
 }
+
+window.editExpense=async function(id){
+  try{
+    const s=await get(ref(db,"expenses/"+id));
+    if(!s.exists())return alert("❌ खर्चाची नोंद सापडली नाही.");
+    const d=s.val()||{};
+    const title=prompt("खर्चाचे कारण",d.title||""); if(title===null)return;
+    const amount=prompt("खर्च रक्कम ₹",d.amount??""); if(amount===null)return;
+    const date=prompt("तारीख (YYYY-MM-DD)",d.date||today()); if(date===null)return;
+    const note=prompt("टीप",d.note||""); if(note===null)return;
+    if(!title.trim()||Number(amount)<=0||!/^\d{4}-\d{2}-\d{2}$/.test(date)){return alert("⚠️ योग्य माहिती भरा.");}
+    await update(ref(db,"expenses/"+id),{title:title.trim(),amount:Number(amount),date,note:note.trim(),updatedAt:new Date().toISOString(),updatedBy:auth.currentUser?.email||""});
+    alert("✅ खर्चाची नोंद Update झाली!");
+    await loadReports();
+    await loadDashboard();
+  }catch(e){console.error(e);alert("❌ खर्च Update झाला नाही: "+(e.message||e.code||"Unknown Error"));}
+};
 
 async function htmlReportPDF(title,headers,rows,fileName){
  const sheet=$("pdfSheet");
